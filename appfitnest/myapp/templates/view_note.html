@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Note</h1>
+<body>
+    <p>{{ data }}</p>>
+
+    <a href="/note/{{ user_id }}">Back</a>
+    <a href="/share_notes/{{ user_id }}/{{ id }}">Share</a>
+    <a href="/note2pdf/{{ id }}">Convert </a>
+</body>
+
+{% endblock %}
