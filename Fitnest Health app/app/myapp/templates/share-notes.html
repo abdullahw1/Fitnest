@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Share Notes</h1>
+<br>
+<hr>
+<hr>
+
+<form method="POST" novalidate>
+    {{ form.hidden_tag()}}
+    <p>
+        Choose friend to share: <br>
+        {{ form.dropdown }}
+        {{ form.share() }}
+    </p>
+</form>
+
+{% endblock %}
