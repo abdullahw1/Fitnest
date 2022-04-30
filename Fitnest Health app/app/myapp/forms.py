@@ -13,11 +13,10 @@ More detailed WTForm documentations can be found [here](https://wtforms.readthed
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
+from flask_pagedown.fields import PageDownField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, InputRequired, Email, EqualTo
 from wtforms import ValidationError
-from flask_pagedown.fields import PageDownField
-
 
 from myapp.models import User
 
@@ -47,6 +46,7 @@ class SignupForm(FlaskForm):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use')
 
+
 class LoginForm(FlaskForm):
     """WTForm for login page
     
@@ -71,6 +71,23 @@ class NextButton(FlaskForm):
     nextCard = SubmitField('Next')
 
 
+class ObjectiveForm(FlaskForm):
+    A = SubmitField('A')
+    B = SubmitField('B')
+    C = SubmitField('C')
+    D = SubmitField('D')
+
+
+class UploadMarkdownForm(FlaskForm):
+    """WTForm for allowing user to upload a markdown file
+    
+    Attributes:
+        file: Markdown file field to select markdown file to upload
+        upload: Submit button to confirm upload
+    """
+    file = FileField('Select markdown file:', validators=[FileRequired(), FileAllowed(['md','txt'])])
+    upload = SubmitField('Upload')
+
 
 class SearchForm(FlaskForm):
     """WTForm for a search field with submit button
@@ -79,9 +96,19 @@ class SearchForm(FlaskForm):
         text: Search text
         button: Submit button to confirm search
     """
-    text = StringField('Text', validators=[DataRequired()])
+    text = StringField('Text', validators=[])
     button = SubmitField('Search')
 
+
+class ShareFlashCardForm(FlaskForm):
+    """WTForm for user to select which friend to share its flashcard
+    
+    Attributes:
+        dropdown: Dropdown to select friend's username
+        share: Submit button to confirm sharing
+    """
+    dropdown = SelectField('Dropdown', coerce=int)
+    share = SubmitField('Share')
 
 
 class NoteForm(FlaskForm):
@@ -95,6 +122,7 @@ class NoteForm(FlaskForm):
     name = StringField('name', validators={DataRequired()})
     note = FileField('file', validators={DataRequired()})
     submit = SubmitField('submit')
+    
 class NoteShareForm(FlaskForm):
     """WTForm for user to select which friend to share note
 
