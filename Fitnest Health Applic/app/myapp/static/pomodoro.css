@@ -1,0 +1,13 @@
+/* Pomodoro app */
+
+#pomodoro-content {
+    height: 90vh;
+}
+
+/* Only use this for pomodoro */
+#main-container {
+    background-image: url(./images/tomato.jpg);
+    background-position: center center;
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+}
