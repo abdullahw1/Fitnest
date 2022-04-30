@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='account.css')}}" />
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Hi {{current_user.username}} !
+</h1>
+
+<h2>
+    Change your avatar:
+</h2>
+
+{% for avatar_id, avatar_filename in avatars.items() %}
+    <a href="/change_avatar/{{ avatar_id }}">
+        <img class="avatar-icon" src="{{url_for('static', filename=avatar_filename)}}" alt="Avatar{{avatar_id}}">
+    </a>
+{% endfor %}
+
+{% endblock %}

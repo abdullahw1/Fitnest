@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Journal</h1>
+<br>
+<a class="btn btn-outline-primary" href="/upload-note">Upload New Journal</a>
+<br>
+<br>
+{{ render_form(search_form, form_type="inline", novalidate=True) }}
+<br>
+<div class="container-fluid">
+    <div class="row">
+        {% if note %}
+        <div class="col-12 col-md-3">
+        {% else %}
+        <div class="col-12">
+        {% endif %}
+            <table class="table">
+                <thread>
+                    <tr>
+                        <th scope="col">Filename</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for posted_note in posted_notes %}
+                    <tr>
+                        <td>
+                            {{ posted_note.name }}
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="/viewNote/{{ posted_note.id }}">View</a>
+                            <a class="btn btn-outline-danger" href="/download-note-as-pdf/{{ posted_note.id }}">&#11015; Delete</a>
+                            <a class="btn btn-outline-info" href="/share-notes/{{ posted_note.id }}">Share </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if note %}
+        <div class="col-12 col-md-9">
+            <h2 style='text-align: center; border: 1px solid;'>{{ note.name }}</h2>
+            <div class='container-fluid' style='background-color:#F2EFFB; border: 1px solid;'>
+                {{ html_text|safe }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+        
+
+
+
+{% endblock %}

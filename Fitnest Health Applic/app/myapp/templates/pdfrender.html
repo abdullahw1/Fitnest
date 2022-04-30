@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Convert .md to pdf</h1>
+<form method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.file }}
+    <input type="submit">
+</form>
+{% if pdf %}
+<h1>your pdf is stored at {{ pdf }}</h1>
+{% endif %}
+{% if md_file %}
+{{ md_file | safe }}
+{% if success %}
+<p>pdf added</p>
+{% endif %}
+{% endif %}
+{% endblock %}
