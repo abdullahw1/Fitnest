@@ -11,8 +11,8 @@
 
     <p>{{ form.note }}</p>
 
-    <p><a href='/note/{{ user_id }}'>Back</a>
-        {{ form.submit() }}</p>
+    <p>{{ form.submit() }}</p>
 </form>
+<a href='/note/{{ user_id }}'>Back</a>
 
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block swiper %}
+<link rel="stylesheet" href="../static/learn-flashcards-style.css" />
+{% endblock %}
+{% block content %}
+
+<p><strong>
+        <h2> {{ first_card.front}}</h2>
+    </strong></p>
+    
+{% if correct_choice %}
+<p>Well done!</p>
+    <div class="card mb-2">
+        <div class="card-body">
+            {{ correct_choice }}
+        </div>
+    </div>
+{% else %}
+<p>Please choose one</p>
+<form method="POST" novalidate>
+    {{ form.hidden_tag()}}
+    <p>{{ form.A() }}</p>
+    <p>{{ form.B() }}</p>
+    <p>{{ form.C() }}</p>
+    <p>{{ form.D() }}</p>
+</form>
+{% endif %}
+
+<div class="container-sm">
+    <div class="row">
+        <div class="col-3 col-sm-2 col-md-1">
+            <a class="btn btn-info btn-lg btn-block" href="/my-flashcards">Back</a>
+        </div>
+        <div class="col-6 col-sm-8 col-md-10"></div>
+        <div class="col-3 col-sm-2 col-md-1">
+            {{ render_form(formNext, button_style="info btn-lg btn-block") }}
+        </div>
+    </div>
+</div>
+{% endblock %}

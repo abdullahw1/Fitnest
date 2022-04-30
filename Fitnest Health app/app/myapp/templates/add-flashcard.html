@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add FlashCard</h1>
+{{ render_form(form, button_style="info", novalidate=True) }}
+<a class="btn btn-info mt-2" href="/my-flashcards">Back</a>
+{% endblock %}

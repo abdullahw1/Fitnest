@@ -18,8 +18,8 @@
                 <td>{{ friend.username }}</td>
                 <td>{{ status }}</td>
                 <td>
-                    {% for href, tag_descrp in buttons %}
-                    <a class="btn btn-outline-primary" href="{{ href }}">{{ tag_descrp }}</a>
+                    {% for href, tag_descrp, button_style in buttons %}
+                    <a class="btn {{button_style}}" href="{{ href }}">{{ tag_descrp }}</a>
                     {% endfor %}
                 </td>
             </tr>
@@ -29,33 +29,27 @@
 </p>
 <hr>
 <h2>Add Friend</h2>
-<form method="POST" novalidate>
-    {{ search_form.hidden_tag()}}
-    <p>
-        {{ search_form.text }}
-        {{ search_form.button() }}
-    </p>
-    <p>
-        <table class="table">
-            <thead>
+{{ render_form(search_form, form_type="inline", novalidate=True) }}
+<p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for username, buttons in found_users %}
             <tr>
-                <th scope="col">Username</th>
-                <th scope="col">Actions</th>
+                <td>{{ username }}</td>
+                <td>
+                    {% for href, tag_descrp, button_style in buttons %}
+                    <a class="btn {{button_style}}" href="{{ href }}">{{ tag_descrp }}</a>
+                    {% endfor %}
+                </td>
             </tr>
-            </thead>
-            <tbody>
-                {% for username, buttons in found_users %}
-                <tr>
-                    <td>{{ username }}</td>
-                    <td>
-                        {% for href, tag_descrp in buttons %}
-                        <a class="btn btn-outline-primary" href="{{ href }}">{{ tag_descrp }}</a>
-                        {% endfor %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </p>
-</form>
+        {% endfor %}
+        </tbody>
+    </table>
+</p>
 {% endblock %}

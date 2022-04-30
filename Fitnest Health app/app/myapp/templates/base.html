@@ -2,91 +2,119 @@
 <html lang="en">
 
 <head>
-  {% block head %}
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
 
-  {% block styles %}
-  <!-- Bootstrap CSS -->
-  {{ bootstrap.load_css() }}
-  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='base.css')}}">
-  {% endblock %}
-  {% block swiper %}
-  {% endblock %}
-  <title>
-    {% if title %}
-    {{title}}
-    {% else %}
-    S2S
-    {% endif %}
-  </title>
-  {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='base.css')}}"> {% endblock %}
+    {% block swiper %} {% endblock %}
+
+    <title>
+        {% if title %} {{title}} {% else %} Fitnest {% endif %}
+    </title>
+    {% endblock %}
 </head>
 
 <body>
-  {% block nav %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Fitnest</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    {% block nav %}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
-        <li class="nav-item"><a class="nav-link" href="/my-friends">Friends</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Workout
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/my-flashcards">My Workouts</a>
-            <a class="dropdown-item" href="/flashcards-sharing">Workout information</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/add-flashcard">Create a workout</a>
-            <a class="dropdown-item" href="/import-flashcard">Share workout</a>
-            <a class="dropdown-item" href="/learn-flashcard">learn Workout</a>
-          </div>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="/pomodoro">Pomodoro</a></li>
-        <li class="nav-item"><a class="nav-link" href="/todo">ToDo Tracker</a></li>
-        {% else %}
-        <li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
-        <li class="nav-item"></li><a class="nav-link" href="/login"> Log In</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
-  {% endblock %}
+    <nav id="base-navbar" class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Fitnest</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <!-- Your page content -->
-  <div class="container-fluid">
-    <br>
-    <div class="container-fluid">
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      {% for m in messages %}
-      <div class="alert alert-primary" role="alert">
-        {{ m }}
-      </div>
-      <!-- <li>{{ m }}</li> -->
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
-    </div>
-    {% block content %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="snip1217 navbar-nav mr-auto">
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="/my-friends">Friends</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        FlashCards
+                    </a>
+                    <div class="my_dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/my-flashcards">My Flashcards</a>
+                        <a class="dropdown-item" href="/flashcards-sharing">Flashcards Sharing</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/add-flashcard">Create a Flashcard</a>
+                        <a class="dropdown-item" href="/import-flashcard">Import from Markdown</a>
+                        <a class="dropdown-item" href="/learn-flashcard">Learn Flashcards</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/pomodoro">Pomodoro</a></li>
+                <li class="nav-item"><a class="nav-link" href="/todo">ToDo Tracker</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Notes
+                    </a>
+                    <div class="my_dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/note">My Journal</a>
+                        <a class="dropdown-item" href="/notes-sharing">Notes Sharing</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="snip1217 navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <img src="data:;base64,{{ encode_to_b64(current_user.avatar) }}" alt="MyAvatar" style="height:30px; width:30px;"
+                            class="user-avatar-md rounded-circle mr-2">
+                            <span>
+                                {{ current_user.username }}
+                                {{ myexample }}
+                            </span>
+                    </a>
+                    <div class="my_dropdown dropdown-menu" style="right:0; left:auto;" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account">Account</a>
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                </li>
+                
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login"> Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     {% endblock %}
-  </div>
 
-  {% block scripts %}
-  <!-- Optional JavaScript -->
-  {{ bootstrap.load_js() }}
-  {% endblock %}
+    <!-- Your page content -->
+    <div id="main-container" class="container-fluid">
+        <br>
+        <div class="container-fluid">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, m in messages %}
+            {% if category == 'error' or category == 'danger' %}
+            <div class="alert alert-danger" role="alert">
+            {% elif category == 'warning' %}
+            <div class="alert alert-warning" role="alert">
+            {% elif category == 'success' %}
+            <div class="alert alert-success" role="alert">
+            {% else %}
+            <div class="alert alert-info" role="alert">
+            {% endif %} 
+                {{ m }}
+            </div>
+            <!-- <li>{{ m }}</li> -->
+            {% endfor %}
+            {% endif %} 
+            {% endwith %}
+        </div>
+        {% from 'bootstrap/form.html' import render_form, render_form_row, render_field, render_hidden_errors %}
+        {% block content %} {% endblock %}
+    </div>
+
+    {% block scripts %}
+    <!-- Optional JavaScript -->
+    {{ bootstrap.load_js() }} {% endblock %}
 </body>
 
 </html>
