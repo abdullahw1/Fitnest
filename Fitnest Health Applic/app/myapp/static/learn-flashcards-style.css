@@ -1,0 +1,16 @@
+#A, #B, #C, #D {
+    background-color: white;
+    border-color: #F1E3EE;
+    border-radius:30px;
+    border-width: 3px;
+    width: 70vw;
+    height: 100px;
+}
+
+p, h2 {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 30px;
+}

@@ -1,0 +1,23 @@
+.swiper{
+    height:35vh;
+}
+
+.swiper-slide{
+    background:#FFE5D9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+}
+
+.swiper-slide-active{
+    padding:50px;
+    justify-content:center;
+    text-align: center;
+}
+
+.front-card{
+    margin-bottom:60px;
+}
+
+
