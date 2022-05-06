@@ -39,9 +39,8 @@ from werkzeug.utils import secure_filename
 
 from myapp import myapp_obj, db
 from myapp.forms import SignupForm, LoginForm, UploadMarkdownForm, SearchForm, NextButton, ObjectiveForm, NoteForm, NoteShareForm
-from myapp.models import User, FlashCard, Friend, FriendStatusEnum, Todo, SharedFlashCard, Note, SharedNote
+from myapp.models import User, Friend, FriendStatusEnum, Todo, Note, SharedNote
 from myapp.models_methods import get_friend_status, get_all_friends
-from myapp.mdparser import md2flashcard
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -143,19 +142,6 @@ def change_avatar(avatar_id):
 
 
 
-'''@myapp_obj.route("/remove-flashcard/<int:flashcard_id>", methods=['GET', 'POST'])
-@login_required
-def remove_flashcard(flashcard_id):
-    """A route to remove a flashcard from user's MyFlashCard,
-    this will redirect back to My Flashcards after removing the specified card
-    """
-    flashcard = FlashCard.query.filter_by(id=flashcard_id).one_or_none()
-    if flashcard:
-        flash(f'Deleted flashcard front="{flashcard.front}", back="{flashcard.back}"')
-        db.session.delete(flashcard)
-        db.session.commit()
-    return redirect(url_for("show_flashcard"))
-'''
 
 # Friends
 @myapp_obj.route("/my-friends", methods=['GET', 'POST'])
@@ -267,7 +253,11 @@ def remove_friend_userid_provided(user_id):
 def tomato():
     """Show Pomodoro timer route"""
     return render_template("/pomodoro.html")
-
+#stopwatch app
+@myapp_obj.route("/stopwatch")
+def stopwatch():
+    """Show stopwatch route"""
+    return render_template("/stopwatch.html")
 
 # Todo app
 @myapp_obj.route("/todo")
