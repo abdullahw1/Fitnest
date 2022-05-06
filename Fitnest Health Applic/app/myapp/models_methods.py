@@ -1,4 +1,4 @@
-from myapp.models import User, FlashCard, Friend, FriendStatusEnum, Todo
+from myapp.models import User, Friend, FriendStatusEnum, Todo
 
 
 def get_user_from_id(user_id):
