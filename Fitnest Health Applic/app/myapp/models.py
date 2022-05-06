@@ -60,7 +60,6 @@ class User(UserMixin, db.Model):
         username: String column, hold username of user, this has to be unique
         password: Hashed password of user
         avatar: Avatar image blob of user, default will be chosen if not defined
-        flashcards: Relationship that points to all flashcards of this user
         friends1: Relationship that points to Friend table's user1
         friends2: Relationship that points to Friend table's user2
     """
@@ -69,7 +68,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(64))
     avatar = db.Column(db.LargeBinary, default=_get_default_avatar())
-    flashcards = db.relationship('FlashCard', backref='user', lazy='dynamic')
     notes = db.relationship('Note', backref='user', lazy='dynamic')
     friends1 = db.relationship('Friend', backref='user1' , lazy='dynamic', foreign_keys=[Friend.user1_id])
     friends2 = db.relationship('Friend', backref='user2' , lazy='dynamic', foreign_keys=[Friend.user2_id])
@@ -103,46 +101,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class FlashCard(db.Model):
-    """Saves FlashCards of users
-
-    Attributes:
-        id: Primary key
-        front: String column, Front page text
-        back: String column, Back page text
-        learned: Integer column, track how many times user learned this card
-        user_id: id of owner user of this flashcard
-        sharings: relationship to a all sharing information of this flashcard
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    front = db.Column(db.Text)
-    back = db.Column(db.Text)
-    view = db.Column(db.Integer)
-    learned = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    sharings = db.relationship('SharedFlashCard', backref='flashcard', cascade='all, delete')
-
-    def __repr__(self):
-        return f'<FlashCard {self.id}: {self.front}, {self.back}>'
-
-
-class SharedFlashCard(db.Model):
-    """Saves sharing information of flashcards
-
-    Attributes:
-        id: Primary key
-        datetime: Datetime column, time of sharing
-        flashcard_id: Integer column, id of flashcard that is shared
-        owner_user_id: Integer column, id of person sharing the card
-        target_user_id: Integer column, id of person that was shared with the card
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    datetime = db.Column(db.DateTime)
-    flashcard_id = db.Column(db.Integer, db.ForeignKey('flash_card.id'))
-    owner_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    target_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    owner_user = db.relationship('User', foreign_keys=[owner_user_id])
-    target_user = db.relationship('User', foreign_keys=[target_user_id])
 
 
 class Note(db.Model):
