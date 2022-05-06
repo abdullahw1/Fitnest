@@ -16,4 +16,6 @@ mkdocstrings==0.16.2
 mkdocs-material==8.0.0
 Markdown==3.3.6
 xhtml2pdf==0.2.5
+reportlab==3.6.6
+
 
