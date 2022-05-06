@@ -100,16 +100,6 @@ class SearchForm(FlaskForm):
     button = SubmitField('Search')
 
 
-class ShareFlashCardForm(FlaskForm):
-    """WTForm for user to select which friend to share its flashcard
-    
-    Attributes:
-        dropdown: Dropdown to select friend's username
-        share: Submit button to confirm sharing
-    """
-    dropdown = SelectField('Dropdown', coerce=int)
-    share = SubmitField('Share')
-
 
 class NoteForm(FlaskForm):
     '''WTForm for upload markdown file to notes page and later converting to pdf
