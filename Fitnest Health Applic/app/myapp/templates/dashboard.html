@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+  {% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+{% endblock %}
+  {% block content %}
+<h1>Welcome back, {{ current_user.username }}</h1>
+hr { border: none; border-top: 1px solid lightgray; }
+  <style>
+    .myDashboard {
+
+      width: 900px; /* Width chosen to fit 3 items per row */
+
+      gap: 50px;
+
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      list-style-type: none;
+      margin: auto;
+    }
+
+    /* THE BOXES */
+    .myDashboard  > li {
+      width: 200px;
+      height: 200px;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+
+    /* The word displayed inside box */
+    .myDashboard > li  > a {
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 20px;
+      height: 100%;
+      width: 100%;
+
+      /* Center aligns text */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .myDashboard > li:nth-child(1) {
+      background-image: url("https://images.pexels.com/photos/606539/pexels-photo-606539.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    }
+
+    .myDashboard > li:nth-child(2) {
+      background-image: url("https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    }
+
+    .myDashboard > li:nth-child(3) {
+      background-image: url("https://images.pexels.com/photos/903171/pexels-photo-903171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    }
+
+    .myDashboard > li:nth-child(4) {
+      background-image: url("https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFjZXxlbnwwfHwwfHw%3D&w=1000&q=80");
+    }
+
+    .myDashboard > li:nth-child(5) {
+      background-image: url("https://i.pinimg.com/736x/bc/59/4a/bc594ad21fb300307b19dab9e29cfa28.jpg");
+    }
+
+    .myDashboard > li:nth-child(6) {
+      background-image: url("https://images.pexels.com/photos/2436087/pexels-photo-2436087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    }
+
+
+  </style>
+</head>
+<body>
+  <ul class="myDashboard">
+    <li><a href="/note">Journal</a></li>
+    <li><a href="#">Workouts</a></li>
+    <li><a href="/my-friends">Friends</a></li>
+    <li><a href="#">Leaderboards</a></li>
+    <li><a href="/pomodoro">Stopwatch</a></li>
+    <li><a href="#">Activity</a></li>
+  </ul>
+</body>
+{% endblock %}

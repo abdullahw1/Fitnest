@@ -93,11 +93,11 @@ def login():
     return render_template("login.html", form=form)
 
 
-@myapp_obj.route("/loggedin")
+@myapp_obj.route("/dashboard")
 @login_required
 def log():
-    """User logged in route, this redirects to homepage"""
-    return render_template("/homepage.html")
+    """User logged in route, this redirects to dashboard"""
+    return render_template("/dashboard.html")
 
 
 @myapp_obj.route("/logout")
