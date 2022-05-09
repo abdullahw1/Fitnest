@@ -15,7 +15,7 @@ myapp_obj.config.from_mapping(
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 )
-myapp_obj.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lux'
+myapp_obj.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'cosmo'
 
 # Install bootstrap extension
 bootstrap = Bootstrap(myapp_obj)
