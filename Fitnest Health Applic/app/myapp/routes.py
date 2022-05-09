@@ -57,6 +57,12 @@ def home():
     return render_template("homepage.html")
 
 
+@myapp_obj.route("/aboutus")
+def about_us():
+    """About Us route"""
+    return render_template("about-us.html")
+
+
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     """Signup page route"""
