@@ -393,7 +393,7 @@ def share_note(note_id):
         shared_note = SharedNote(note_id=note_id, datetime=now, owner_user_id=current_user.get_id(), target_user_id=user.id)
         db.session.add(shared_note)
         db.session.commit()
-        flash(f'Shared note "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
+        flash(f'Shared Journal "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
         return redirect(url_for("show_notes"))
     return render_template("share-notes.html", note=note, form=form)
 
