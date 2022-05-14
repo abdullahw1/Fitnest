@@ -371,7 +371,7 @@ def upload_note():
         note = Note(name=filename, data=content, user_id=current_user.get_id())
         db.session.add(note)
         db.session.commit()
-        flash(f'Uploaded note {filename} ')
+        flash(f'Uploaded Journal {filename} ')
         return redirect(url_for("show_notes"))
     return render_template("import-note.html", form=form)
 
