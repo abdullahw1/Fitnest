@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<style>
+    body {
+        background-color: #222222;
+        color: white;
+    }
+</style>
 <h1 style="text-align:center;">About Us</h1>
+<br>
+<img style="display:block;margin-left:32.5%;border-radius:10px;", src="{{url_for('static', filename='/images/About_Us.png')}}", width="35%", height="35%", alt="aboutus">
+<br><br>
+<div style="display:block;margin-left:4.36%;">
+    <p>
+    Our goal at Fitnest is to provide proper fitness training for beginner gym-goers.
+    Fitnest helps new gym-goers know how to start their fitness journey by providing relevant fitness information and nutritional goals for each individual.
+    We make our services affordable and easy to use. We also provide a personalized experience to a diverse group of gym-goers because not everyone has generalized fitness requirements.
+    Fitnest provides versatile features all in one platform to make the gym-goer's experience more convenient.
+    Fitnest helps motivate gym-goers and promote physical health.  We encourage gym-goers to compete with others to improve their physical form.
+    Fitnest users can see their fitness data and progress. They can also keep track of their workout time and share it with their gym buddies.
+    </p>
+    <br>
+    <p>
+        At Fitnest, we make new gym-goers feel welcome at home and strive for their fitness goals.
+    </p>
+</div>
+
 
 {% endblock %}

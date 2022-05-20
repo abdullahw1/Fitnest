@@ -115,12 +115,12 @@ def logout():
 
 
 AVATAR_IMGS = {
-    1: 'images/clipart722174.png',
-    2: 'images/clipart722180.png',
-    3: 'images/clipart1236782.png',
-    4: 'images/clipart1236792.png',
-    5: 'images/clipart1237041.png',
-    6: 'images/clipart1237090.png',
+    1: 'images/John_Avatar.png',
+    2: 'images/avatar2.png',
+    3: 'images/Spencer_Avatar.png',
+    4: 'images/Ali_Avatar.png',
+    5: 'images/avatar5.png',
+    6: 'images/Hannah_Avatar.png',
 }
 
 @myapp_obj.route("/account")
@@ -377,7 +377,7 @@ def upload_note():
         note = Note(name=filename, data=content, user_id=current_user.get_id())
         db.session.add(note)
         db.session.commit()
-        flash(f'Uploaded Journal {filename} ')
+        flash(f'Uploaded note {filename} ')
         return redirect(url_for("show_notes"))
     return render_template("import-note.html", form=form)
 
@@ -399,7 +399,7 @@ def share_note(note_id):
         shared_note = SharedNote(note_id=note_id, datetime=now, owner_user_id=current_user.get_id(), target_user_id=user.id)
         db.session.add(shared_note)
         db.session.commit()
-        flash(f'Shared Journal "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
+        flash(f'Shared note "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
         return redirect(url_for("show_notes"))
     return render_template("share-notes.html", note=note, form=form)
 
