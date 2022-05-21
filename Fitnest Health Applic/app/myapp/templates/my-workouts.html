@@ -1,0 +1,227 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <title>My Workouts</title>
+  <style>
+    /************************************************************************************
+        Header
+    *************************************************************************************/
+    header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    header > .title {
+      align-self: flex-start;
+      border-bottom: 1px solid #000;
+      padding-right: 300px;
+    }
+
+    header > .account {
+      align-self: flex-start;
+    }
+
+    header > .nav {
+      position: absolute;
+      top: 90px;
+    }
+
+    .workouts-page > h1 {
+      text-align: center;
+    }
+
+    /************************************************************************************
+        Table
+    *************************************************************************************/
+
+    table.workouts {
+      border-collapse:separate;
+      border-spacing:0 25px;
+      width: 90%;
+      margin: auto;
+      /* Bring table in closer to My Workouts header */
+      margin-top: -20px;
+    }
+
+    /* We can't disable border-spacing between header row and data rows, we offset header values */
+    .workouts tr > th {
+      position: relative;
+      top: 10px;
+    }
+
+    .workouts tr > td {
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+
+    /* Transparent border for rounded corner look */
+    .workouts td {
+      border: solid 1px rgba(0,0,0,0.0);
+      border-style: solid none;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.05);
+    }
+    .workouts td:first-child {
+      border-left-style: solid;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .workouts td:last-child {
+      border-right-style: solid;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    /* end */
+
+    .workouts tr:not(:first-child) {
+      transform: scale(1);
+      box-shadow: 2px 3px 3px 1px rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
+    /************************************************************************************
+        Add workout button (fixed to bottom right of screen)
+    *************************************************************************************/
+
+    .workouts-page .add-workout {
+      font-size: 50px;
+      text-decoration: none;
+
+      width: 70px;
+      height: 70px;
+
+      bottom: 50px;
+      right: 50px;
+      position: fixed;
+
+      background-color: rgba(10, 17, 77);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .workouts-page .add-workout > a {
+      text-decoration: none;
+      padding: 20px;
+      color: rgba(192,202,240);
+    }
+
+
+    /************************************************************************************
+        Suggested Workouts
+    *************************************************************************************/
+
+    ul {
+      width: 80%;
+      gap: 50px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      list-style-type: none;
+      margin: auto;
+
+      padding-top: 30px;
+    }
+
+    ul > li {
+      width: 200px;
+      height: 200px;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+    }
+
+    li > a {
+      color: red;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      align-items: top;
+      justify-content: center;
+
+      margin-top: -20px;
+
+    }
+
+    li:nth-child(1) {
+      background-image: url("https://myfamilyphysio.com.au/wp-content/uploads/2020/08/common-thigh-injuries-quads-jpg.jpg");
+    }
+
+    li:nth-child(2) {
+      background-image: url("https://totalbodytrainingtx.com/wp-content/uploads/2020/10/Generic-Travel-Blog-Title-iPhone-Layout-52-768x768.png");
+    }
+
+    li:nth-child(3) {
+      background-image: url("https://i0.wp.com/outmatchfitness.com/wp-content/uploads/rectus.png?resize=421%2C243&ssl=1");
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="title"><span>Fitnest</span></h1>
+    <div class="account"><a href="/logout">Logout</a></div>
+    <div class="nav"><a href="/dashboard">Back</a></div>
+  </header>
+
+  <div class="workouts-page">
+
+    <h1>My Workouts</h1>
+
+    <table class="workouts">
+      <tr>
+        <th>Name</th>
+        <th>Muscle Group</th>
+        <th>Duration</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Workout #1</td>
+        <td>Legs</td>
+        <td>1 hour</td>
+        <td><a href="/edit-workout">Edit</a></td>
+      </tr>
+      <tr>
+        <td>Jump rope workout</td>
+        <td>Full Body</td>
+        <td>30 min</td>
+        <td><a href="/edit-workout">Edit</a></td>
+      </tr>
+    </table>
+
+    <h1>Suggested Workouts</h1>
+
+    <ul>
+      <li><a href="/leg-day">Legs</a></li>
+      <li><a href="/upperbody-day">Upper Body</a></li>
+      <li><a href="/core-day">Core</a></li>
+    </ul>
+
+    <!-- Add workout -->
+    <div class="add-workout">
+      <a href="/add-workout">+</a>
+    </div>
+
+</div>
+
+</body>
+</html>

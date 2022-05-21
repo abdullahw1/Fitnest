@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Leg Day</title>
+     <style>
+    /************************************************************************************
+        Header
+    *************************************************************************************/
+    header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    header > .title {
+      align-self: flex-start;
+      border-bottom: 1px solid #000;
+      padding-right: 300px;
+    }
+
+    header > .account {
+      align-self: flex-start;
+    }
+
+    header > .nav {
+      position: absolute;
+      top: 90px;
+    }
+
+    .legday > h1 {
+      text-align: center;
+    }
+
+
+    /************************************************************************************
+       Videos
+    *************************************************************************************/
+    .myVideos {
+      gap: 150px;
+      padding-bottom: 10px;
+      padding-top: 70px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      list-style-type: none;
+      margin: auto;
+    }
+
+    /************************************************************************************
+       Description
+    *************************************************************************************/
+    p1{
+      padding-left: 200px;
+      padding-bottom: 100px;
+    }
+
+    p2{
+      padding-left: 400px;
+      padding-bottom: 100px;
+
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="createWorkout-page">
+    <header>
+         <h1 class="title"><span>Fitnest</span></h1>
+         <div class="account"><a href="/logout">Logout</a></div>
+        <div class="nav"><a href="/my-workouts">Back</a></div>
+    </header>
+        <div class="legday">
+             <h1>Leg Day</h1>
+        </div>
+
+    <div class="myVideos">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3upx6bSFTSE"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/q7rCeOa_m58" title="YouTube video player"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+
+
+        <p1><strong>The perfect leg workout to build big strong legs</strong></p1>
+        <p2><strong>20 minute complete home leg workout | Follow Along</strong></p2>
+
+
+    <div class="myVideos">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Nr0voKyfiiE" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/n70Zt0lHEbE" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+        <p1><strong>The perfect leg workout - 8 Best leg exercises</strong></p1>
+        <p2><strong>30 minute full leg workout at home (Dumbells only)</strong></p2>
+
+</body>
+</html>

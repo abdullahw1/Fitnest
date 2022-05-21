@@ -57,12 +57,6 @@ def home():
     return render_template("homepage.html")
 
 
-@myapp_obj.route("/aboutus")
-def about_us():
-    """About Us route"""
-    return render_template("about-us.html")
-
-
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     """Signup page route"""
@@ -99,12 +93,60 @@ def login():
     return render_template("login.html", form=form)
 
 
+"""Creating a route for the dashboard"""
 @myapp_obj.route("/dashboard")
 @login_required
 def log():
     """User logged in route, this redirects to dashboard"""
     return render_template("/dashboard.html")
 
+
+"""Creating a route for the My Workouts page"""
+@myapp_obj.route("/my-workouts")
+@login_required
+def my_workouts():
+    """User logged in route and selects workout feature, this redirects to My Workouts page"""
+    return render_template("/my-workouts.html")
+
+
+"""Creating a route for the Add a Workout page"""
+@myapp_obj.route("/add-workout")
+@login_required
+def add_workout():
+    """User logged in route and selects add workout button, this redirects to Add a Workout page"""
+    return render_template("/add-workout.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/edit-workout")
+@login_required
+def edit_workout():
+    """User logged in route and selects edit workout button, this redirects to Edit a Workout page"""
+    return render_template("/edit-workout.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/leg-day")
+@login_required
+def leg_workout():
+    """User logged in route and wants to view suggested workouts for legs, this redirects to Leg Day page"""
+    return render_template("/leg-day.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/upperbody-day")
+@login_required
+def upperbody_workout():
+    """User logged in route and wants to view suggested workouts for upper body, this redirects to Upper Body Day page"""
+    return render_template("/upperbody-day.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/core-day")
+@login_required
+def core_workout():
+    """User logged in route and wants to view suggested workouts for their core, this redirects to Core Day page"""
+    return render_template("/core-day.html")
 
 @myapp_obj.route("/logout")
 @login_required
@@ -115,12 +157,12 @@ def logout():
 
 
 AVATAR_IMGS = {
-    1: 'images/John_Avatar.png',
-    2: 'images/avatar2.png',
-    3: 'images/Spencer_Avatar.png',
-    4: 'images/Ali_Avatar.png',
-    5: 'images/avatar5.png',
-    6: 'images/Hannah_Avatar.png',
+    1: 'images/clipart722174.png',
+    2: 'images/clipart722180.png',
+    3: 'images/clipart1236782.png',
+    4: 'images/clipart1236792.png',
+    5: 'images/clipart1237041.png',
+    6: 'images/clipart1237090.png',
 }
 
 @myapp_obj.route("/account")
@@ -377,7 +419,7 @@ def upload_note():
         note = Note(name=filename, data=content, user_id=current_user.get_id())
         db.session.add(note)
         db.session.commit()
-        flash(f'Uploaded note {filename} ')
+        flash(f'Uploaded Journal {filename} ')
         return redirect(url_for("show_notes"))
     return render_template("import-note.html", form=form)
 
@@ -399,7 +441,7 @@ def share_note(note_id):
         shared_note = SharedNote(note_id=note_id, datetime=now, owner_user_id=current_user.get_id(), target_user_id=user.id)
         db.session.add(shared_note)
         db.session.commit()
-        flash(f'Shared note "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
+        flash(f'Shared Journal "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
         return redirect(url_for("show_notes"))
     return render_template("share-notes.html", note=note, form=form)
 
@@ -440,3 +482,4 @@ def notes_sharing_cancel_sharing(sharing_id):
     db.session.delete(sharing)
     db.session.commit()
     return redirect(url_for('notes_sharing'))
+
