@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Journal Sharing</h1>
+<h1>Notes Sharing</h1>
 <br>
-<h2>Journals | Shared With Others</h2>
+<h2>Notes | Shared With Others</h2>
 <p>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Journal</th>
+            <th scope="col">Notes</th>
             <th scope="col">Shared With</th>
             <th scope="col">Shared On</th>
             <th scope="col">Actions</th>
@@ -35,7 +35,8 @@
             </td>
             <td>
                 <p>
-                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Delete Journal</a>
+                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Cancel
+                        Sharing</a>
                 </p>
             </td>
         </tr>
@@ -44,13 +45,13 @@
 </table>
 </p>
 <hr>
-<h2>Journals | Shared With Me</h2>
+<h2>Notes | Shared With Me</h2>
 <p>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Journal</th>
+            <th scope="col">Notes</th>
             <th scope="col">Shared By</th>
             <th scope="col">Shared On</th>
             <th scope="col">Actions</th>
@@ -78,8 +79,9 @@
             <td>
                 <p>
                     <a class="btn btn-outline-success" href="/notes-sharing/add-to-mynotes/{{ x.id }}">Add To My
-                        Journal</a>
-                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Delete Journal</a>
+                        Notes</a>
+                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Cancel
+                        Sharing</a>
                 </p>
             </td>
         </tr>

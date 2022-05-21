@@ -482,3 +482,4 @@ def notes_sharing_cancel_sharing(sharing_id):
     db.session.delete(sharing)
     db.session.commit()
     return redirect(url_for('notes_sharing'))
+
