@@ -3,7 +3,7 @@ import threading
 import webbrowser
 from myapp import myapp_obj, db
 
-DEBUG = False
+DEBUG = True
 PORT_NUMBER = 5012
 
 

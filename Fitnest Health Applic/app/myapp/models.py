@@ -46,7 +46,7 @@ class Friend(db.Model):
 
 
 def _get_default_avatar():
-    default_cat_img = os.path.join(basedir, './static/images/clipart722180.png')
+    default_cat_img = os.path.join(basedir, './static/images/John_Avatar.png')
     assert os.path.exists(default_cat_img), f'"{default_cat_img}" does not exists'
     with open(default_cat_img, 'rb') as fp:
         return fp.read()

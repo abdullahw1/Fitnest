@@ -57,6 +57,12 @@ def home():
     return render_template("homepage.html")
 
 
+@myapp_obj.route("/about-us")
+def about_us():
+    """About Us route"""
+    return render_template("about-us.html")
+
+
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     """Signup page route"""
@@ -157,12 +163,12 @@ def logout():
 
 
 AVATAR_IMGS = {
-    1: 'images/clipart722174.png',
-    2: 'images/clipart722180.png',
-    3: 'images/clipart1236782.png',
-    4: 'images/clipart1236792.png',
-    5: 'images/clipart1237041.png',
-    6: 'images/clipart1237090.png',
+    1: 'images/John_Avatar.png',
+    2: 'images/avatar2.png',
+    3: 'images/Spencer_Avatar.png',
+    4: 'images/Ali_Avatar.png',
+    5: 'images/avatar5.png',
+    6: 'images/Hannah_Avatar.png',
 }
 
 @myapp_obj.route("/account")
