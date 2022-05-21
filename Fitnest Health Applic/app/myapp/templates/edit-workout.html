@@ -1,0 +1,199 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <title>Edit Workout</title>
+  <style>
+    /************************************************************************************
+        Header
+    *************************************************************************************/
+    header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    header > .title {
+      align-self: flex-start;
+      border-bottom: 1px solid #000;
+      padding-right: 300px;
+    }
+
+    header > .account {
+      align-self: flex-start;
+    }
+
+    header > .nav {
+      position: absolute;
+      top: 90px;
+    }
+
+    .createWorkout-page > h1 {
+      text-align: center;
+    }
+
+    /************************************************************************************
+        Workout Form
+    *************************************************************************************/
+    .createWorkout-page .container {
+      display: flex;
+      gap: 50px;
+      width: 90%;
+      margin: auto;
+    }
+
+    .createWorkout-page .durationSetContainer {
+       display: flex;
+    }
+
+    .createWorkout-page .column {
+      width: 50%;
+    }
+
+    .createWorkout-page fieldset.column {
+      margin-top: 15px;
+      display: flex;
+    }
+
+    .createWorkout-page fieldset.column > .column {
+      text-align: center;
+      width: auto;
+    }
+
+    .createWorkout-page fieldset.column > .column > label {
+      font-weight: bold;
+      font-size: 0.75rem;
+      margin: 10px 0 0 0;
+    }
+
+    .createWorkout-page fieldset.column > .column > input {
+      text-align: center;
+      width: 50px;
+      margin: 0 5px;
+    }
+
+    .createWorkout-page fieldset.column > .divider {
+      align-self: flex-end;
+      padding-bottom: 10px;
+    }
+
+    .createWorkout-page label {
+      margin: 15px 0;
+      display: block;
+    }
+
+    .createWorkout-page input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .createWorkout-page textarea {
+      height: 70%;
+    }
+
+    .createWorkout-page .buttonContainer {
+      text-align: center;
+      padding: 70px;
+    }
+
+    .createWorkout-page .buttonContainer > button {
+      border-radius: 5px;
+      color: white;
+      background-color: rgba(0,0,0,0.8);
+      padding: 10px 100px;
+
+    }
+
+    /* Removes browser's default styling */
+    .createWorkout-page fieldset {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+      padding-block-start: 0;
+      padding-block-end: 0;
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+      border: none;
+      min-inline-size: min-content;
+  }
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="title"><span>Fitnest</span></h1>
+    <div class="account"><a href="#">Logout</a></div>
+    <div class="nav"><a href="/my-workouts">Back</a></div>
+  </header>
+
+  <div class="createWorkout-page">
+
+    <h1>Edit Workout</h1>
+
+    <form method="POST">
+      <div class="container">
+        <div class="column">
+          <div>
+            <label for="name">Give your workout a name</label>
+            <input type="text" name="name" id="name" placeholder="e.g. legs workout, upper body">
+          </div>
+          <div>
+            <label for="muscle">Muscle Group</label>
+            <select name="muscle" id="muscle">
+              <option value="">Select a muscle...</option>
+              <option value="back">Back</option>
+              <option value="chest">Chest</option>
+              <option value="legs">Legs</option>
+              <option value="arms">Arms</option>
+            </select>
+          </div>
+          <div class="durationSetContainer">
+
+              <!-- A label can only be associated with 1 form input, so we use fieldset to label a group (with Duration) -->
+              <fieldset class="column">
+                <legend>Duration</legend>
+                <div class="column">
+                  <label for="hour">Hour</label>
+                  <input type="number" name="hour" id="hour" placeholder="00" />
+                </div>
+                <div class="divider"> : </div>
+                <div class="column">
+                  <label for="minute">Minute</label>
+                  <input type="number" name="minute" id="minute" placeholder="00" />
+                </div>
+              </fieldset>
+
+
+              <fieldset class="column">
+                <legend>Sets / Reps</legend>
+                <div class="column">
+                  <label for="Sets">Sets</label>
+                  <input type="number" name="sets" id="sets" step="1" />
+                </div>
+                <div class="column">
+                  <label for="reps">Reps</label>
+                  <input type="number" name="reps" id="reps" step="1" />
+                </div>
+              </fieldset>
+
+          </div>
+        </div>
+        <div class="column">
+          <label for="workout">Workout</label>
+          <textarea name="workout" id="workout" placeholder="Write your workout here..."></textarea>
+        </div>
+      </div>
+      <div class="buttonContainer">
+        <button>Add to my workouts</button>
+      </div>
+    </form>
+
+  </div>
+
+</body>
+</html>

@@ -93,12 +93,60 @@ def login():
     return render_template("login.html", form=form)
 
 
+"""Creating a route for the dashboard"""
 @myapp_obj.route("/dashboard")
 @login_required
 def log():
     """User logged in route, this redirects to dashboard"""
     return render_template("/dashboard.html")
 
+
+"""Creating a route for the My Workouts page"""
+@myapp_obj.route("/my-workouts")
+@login_required
+def my_workouts():
+    """User logged in route and selects workout feature, this redirects to My Workouts page"""
+    return render_template("/my-workouts.html")
+
+
+"""Creating a route for the Add a Workout page"""
+@myapp_obj.route("/add-workout")
+@login_required
+def add_workout():
+    """User logged in route and selects add workout button, this redirects to Add a Workout page"""
+    return render_template("/add-workout.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/edit-workout")
+@login_required
+def edit_workout():
+    """User logged in route and selects edit workout button, this redirects to Edit a Workout page"""
+    return render_template("/edit-workout.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/leg-day")
+@login_required
+def leg_workout():
+    """User logged in route and wants to view suggested workouts for legs, this redirects to Leg Day page"""
+    return render_template("/leg-day.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/upperbody-day")
+@login_required
+def upperbody_workout():
+    """User logged in route and wants to view suggested workouts for upper body, this redirects to Upper Body Day page"""
+    return render_template("/upperbody-day.html")
+
+
+"""Creating a route for the Edit a Workout page"""
+@myapp_obj.route("/core-day")
+@login_required
+def core_workout():
+    """User logged in route and wants to view suggested workouts for their core, this redirects to Core Day page"""
+    return render_template("/core-day.html")
 
 @myapp_obj.route("/logout")
 @login_required
