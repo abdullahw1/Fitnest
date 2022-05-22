@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+
+  {% block header %}
+  <h1>{% block title %}Leg Day{% endblock %}</h1>
+{% endblock %}
+
+ {% block content %}
 <head>
     <title>Core Day</title>
      <style>
@@ -70,8 +76,6 @@
 
 <body>
     <header>
-         <h1 class="title"><span>Fitnest</span></h1>
-         <div class="account"><a href="/logout">Logout</a></div>
         <div class="nav"><a href="/my-workouts">Back</a></div>
     </header>
         <div class="coreday">
@@ -105,3 +109,5 @@
 
 </body>
 </html>
+
+{% endblock %}

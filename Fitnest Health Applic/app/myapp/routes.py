@@ -38,8 +38,8 @@ from werkzeug.utils import secure_filename
 
 
 from myapp import myapp_obj, db
-from myapp.forms import SignupForm, LoginForm, UploadMarkdownForm, SearchForm, NextButton, ObjectiveForm, NoteForm, NoteShareForm
-from myapp.models import User, Friend, FriendStatusEnum, Todo, Note, SharedNote
+from myapp.forms import SignupForm, LoginForm, UploadMarkdownForm, SearchForm, NextButton, ObjectiveForm, NoteForm, NoteShareForm, AddWorkoutForm
+from myapp.models import User, Friend, FriendStatusEnum, Todo, Note, SharedNote, Workout
 from myapp.models_methods import get_friend_status, get_all_friends
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -111,16 +111,23 @@ def log():
 @myapp_obj.route("/my-workouts")
 @login_required
 def my_workouts():
-    """User logged in route and selects workout feature, this redirects to My Workouts page"""
-    return render_template("/my-workouts.html")
+    workouts = Workout.query.filter_by(owner_user_id=current_user.get_id()).order_by(Workout.id.desc()).all()
+    return render_template("/my-workouts.html", workouts=workouts)
 
 
 """Creating a route for the Add a Workout page"""
-@myapp_obj.route("/add-workout")
+@myapp_obj.route("/add-workout", methods=['GET', 'POST'])
 @login_required
 def add_workout():
+    form = AddWorkoutForm()
+    if form.validate_on_submit():
+        workout = Workout(name=form.name.data, muscle_group=form.muscle_group.data, duration_hour=form.duration_hour.data, duration_minute=form.duration_minute.data, sets=form.sets.data, reps=form.reps.data, description=form.description.data, owner_user_id=current_user.get_id())
+        db.session.add(workout)
+        db.session.commit()
+        flash("Your workout has been created.")
+        return redirect(url_for("my_workouts"))
     """User logged in route and selects add workout button, this redirects to Add a Workout page"""
-    return render_template("/add-workout.html")
+    return render_template("/add-workout.html", form=form)
 
 
 """Creating a route for the Edit a Workout page"""

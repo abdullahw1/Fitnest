@@ -1,36 +1,9 @@
-<!doctype html>
+{% extends "base.html" %}
+{% block content %}
 
-<html lang="en">
-<head>
-  <title>My Workouts</title>
   <style>
-    /************************************************************************************
-        Header
-    *************************************************************************************/
-    header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
 
-    header > .title {
-      align-self: flex-start;
-      border-bottom: 1px solid #000;
-      padding-right: 300px;
-    }
-
-    header > .account {
-      align-self: flex-start;
-    }
-
-    header > .nav {
-      position: absolute;
-      top: 90px;
-    }
-
-    .workouts-page > h1 {
+    .workouts-page h1 {
       text-align: center;
     }
 
@@ -51,6 +24,7 @@
     .workouts tr > th {
       position: relative;
       top: 10px;
+      text-align: center;
     }
 
     .workouts tr > td {
@@ -119,7 +93,7 @@
         Suggested Workouts
     *************************************************************************************/
 
-    ul {
+    .workouts-page ul {
       width: 80%;
       gap: 50px;
 
@@ -135,7 +109,7 @@
       padding-top: 30px;
     }
 
-    ul > li {
+    .workouts-page ul > li {
       width: 200px;
       height: 200px;
 
@@ -144,7 +118,7 @@
       border-radius: 15px;
     }
 
-    li > a {
+    .workouts-page li > a {
       color: red;
       text-decoration: none;
       font-weight: 800;
@@ -160,28 +134,20 @@
 
     }
 
-    li:nth-child(1) {
+    .workouts-page li:nth-child(1) {
       background-image: url("https://myfamilyphysio.com.au/wp-content/uploads/2020/08/common-thigh-injuries-quads-jpg.jpg");
     }
 
-    li:nth-child(2) {
+    .workouts-page li:nth-child(2) {
       background-image: url("https://totalbodytrainingtx.com/wp-content/uploads/2020/10/Generic-Travel-Blog-Title-iPhone-Layout-52-768x768.png");
     }
 
-    li:nth-child(3) {
+    .workouts-page li:nth-child(3) {
       background-image: url("https://i0.wp.com/outmatchfitness.com/wp-content/uploads/rectus.png?resize=421%2C243&ssl=1");
     }
 
 
   </style>
-</head>
-<body>
-
-  <header>
-    <h1 class="title"><span>Fitnest</span></h1>
-    <div class="account"><a href="/logout">Logout</a></div>
-    <div class="nav"><a href="/dashboard">Back</a></div>
-  </header>
 
   <div class="workouts-page">
 
@@ -194,18 +160,18 @@
         <th>Duration</th>
         <th></th>
       </tr>
+
+      {% for workout in workouts %}
+
       <tr>
-        <td>Workout #1</td>
-        <td>Legs</td>
-        <td>1 hour</td>
-        <td><a href="/edit-workout">Edit</a></td>
+        <td>{{ workout.name }}</td>
+        <td>{{ workout.muscle_group | capitalize }}</td>
+        <td>{{ workout.duration_hour }} hour, {{ workout.duration_minute }} minute</td>
+        <td>{{ workout.description }}</td>
       </tr>
-      <tr>
-        <td>Jump rope workout</td>
-        <td>Full Body</td>
-        <td>30 min</td>
-        <td><a href="/edit-workout">Edit</a></td>
-      </tr>
+
+      {% endfor %}
+
     </table>
 
     <h1>Suggested Workouts</h1>
@@ -222,6 +188,6 @@
     </div>
 
 </div>
+{% endblock %}
 
-</body>
-</html>
+

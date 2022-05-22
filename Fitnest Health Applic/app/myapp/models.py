@@ -139,3 +139,19 @@ class SharedNote(db.Model):
     target_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner_user = db.relationship('User', foreign_keys=[owner_user_id])
     target_user = db.relationship('User', foreign_keys=[target_user_id])
+
+class Workout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    muscle_group = db.Column(db.String)
+    duration_hour = db.Column(db.Integer)
+    duration_minute = db.Column(db.Integer)
+    sets = db.Column(db.Integer)
+    reps = db.Column(db.Integer)
+    description = db.Column(db.Text)
+    owner_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+
+
+

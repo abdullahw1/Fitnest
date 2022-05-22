@@ -32,3 +32,9 @@ pagedown = PageDown(myapp_obj)
 pagedown = PageDown(myapp_obj)
 
 from myapp import routes, models
+
+# Create *.db file from schema (if doesn't exists)
+try:
+    db.create_all()
+except:
+    pass

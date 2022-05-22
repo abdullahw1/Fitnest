@@ -1,42 +1,12 @@
-<!doctype html>
+{% extends "base.html" %}
+{% block content %}
 
-<html lang="en">
-<head>
-  <title>Add Workout</title>
   <style>
-    /************************************************************************************
-        Header
-    *************************************************************************************/
-    header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
+    .createWorkout-page .error {
+      color: red;
+      font-weight: bold;
     }
 
-    header > .title {
-      align-self: flex-start;
-      border-bottom: 1px solid #000;
-      padding-right: 300px;
-    }
-
-    header > .account {
-      align-self: flex-start;
-    }
-
-    header > .nav {
-      position: absolute;
-      top: 90px;
-    }
-
-    .createWorkout-page > h1 {
-      text-align: center;
-    }
-
-    /************************************************************************************
-        Workout Form
-    *************************************************************************************/
     .createWorkout-page .container {
       display: flex;
       gap: 50px;
@@ -70,7 +40,7 @@
 
     .createWorkout-page fieldset.column > .column > input {
       text-align: center;
-      width: 50px;
+      width: 75px;
       margin: 0 5px;
     }
 
@@ -122,35 +92,25 @@
 
 
   </style>
-</head>
-<body>
 
-  <header>
-    <h1 class="title"><span>Fitnest</span></h1>
-    <div class="account"><a href="#">Logout</a></div>
-    <div class="nav"><a href="/my-workouts">Back</a></div>
-  </header>
 
   <div class="createWorkout-page">
 
     <h1>Create a Workout</h1>
 
     <form method="POST">
+      {{ form.csrf_token }}
       <div class="container">
         <div class="column">
           <div>
             <label for="name">Give your workout a name</label>
-            <input type="text" name="name" id="name" placeholder="e.g. legs workout, upper body">
+            <div class="error">{{form.errors.name | join(' ') }}</div>
+            {{form.name}}
           </div>
           <div>
             <label for="muscle">Muscle Group</label>
-            <select name="muscle" id="muscle">
-              <option value="">Select a muscle...</option>
-              <option value="back">Back</option>
-              <option value="chest">Chest</option>
-              <option value="legs">Legs</option>
-              <option value="arms">Arms</option>
-            </select>
+            <div class="error">{{form.errors.muscle_group | join(' ') }}</div>
+            {{form.muscle_group}}
           </div>
           <div class="durationSetContainer">
 
@@ -158,13 +118,15 @@
               <fieldset class="column">
                 <legend>Duration</legend>
                 <div class="column">
+                  <div class="error">{{form.errors.duration_hour | join(' ') }}</div>
                   <label for="hour">Hour</label>
-                  <input type="number" name="hour" id="hour" placeholder="00" />
+                  {{form.duration_hour}}
                 </div>
                 <div class="divider"> : </div>
                 <div class="column">
+                  <div class="error">{{form.errors.duration_minute | join(' ') }}</div>
                   <label for="minute">Minute</label>
-                  <input type="number" name="minute" id="minute" placeholder="00" />
+                  {{form.duration_minute}}
                 </div>
               </fieldset>
 
@@ -172,12 +134,14 @@
               <fieldset class="column">
                 <legend>Sets / Reps</legend>
                 <div class="column">
+                  <div class="error">{{form.errors.sets | join(' ') }}</div>
                   <label for="Sets">Sets</label>
-                  <input type="number" name="sets" id="sets" step="1" />
+                  {{form.sets}}
                 </div>
                 <div class="column">
+                  <div class="error">{{form.errors.reps | join(' ') }}</div>
                   <label for="reps">Reps</label>
-                  <input type="number" name="reps" id="reps" step="1" />
+                  {{form.reps}}
                 </div>
               </fieldset>
 
@@ -185,15 +149,14 @@
         </div>
         <div class="column">
           <label for="workout">Workout</label>
-          <textarea name="workout" id="workout" placeholder="Write your workout here..."></textarea>
+          {{form.description}}
         </div>
       </div>
       <div class="buttonContainer">
-        <button>Add to my workouts</button>
+        <button type="submit">Add to my workouts</button>
       </div>
     </form>
 
   </div>
+  {% endblock %}
 
-</body>
-</html>
