@@ -1,52 +1,44 @@
-// Set variables
-var minuteTimer = 25;
-var secondTimer = "00";
+// global var
+const time_el = document.querySelector('.watch .time');
 
-// Starting template for the timer
-function timerTemplate() {
-  document.getElementById("minutes").innerHTML = minuteTimer;
-  document.getElementById("seconds").innerHTML = secondTimer;
+const start_btn = document.getElementById('start')
+const stop_btn = document.getElementById('stop')
+const reset_btn = document.getElementById('reset')
+
+let seconds = 0;
+let interval = null;
+
+start_btn.addEventListener('click', start)
+stop_btn.addEventListener('click', stop)
+reset_btn.addEventListener('click', reset)
+
+function timer() {
+    seconds++
+    let hrs = Math.floor(seconds / 3600);
+    let mins = Math.floor((seconds - (hrs * 3600)) / 60);
+    let secs = seconds % 60;
+
+    if (secs < 10) secs = '0' + secs;
+    if (mins < 10) mins = '0' + mins;
+    if (hrs < 10) hrs = '0' + hrs;
+
+    time_el.innerText = `${hrs}:${mins}:${secs}`
 }
 
-function timerStart() {
-  // Start the time with 5 mins
-  minuteTimer = 24;
-  secondTimer = 59;
-
-  // Add minute & second to the page
-  document.getElementById("minutes").innerHTML = minuteTimer;
-  document.getElementById("seconds").innerHTML = secondTimer;
-
-  // Start the countdown
-  var minutesInterval = setInterval(minutesTimer, 60000);
-  var secondsInterval = setInterval(secondsTimer, 1000);
-
-  // Minute counter function
-  function minutesTimer() {
-    minuteTimer -= 1;
-    document.getElementById("minutes").innerHTML = minuteTimer;
-  }
-
-  // Second counter function
-  function secondsTimer() {
-    secondTimer -= 1;
-    document.getElementById("seconds").innerHTML = secondTimer;
-
-    // Check if the seconds and minutes counter has reached 0
-    // End the session when reach 0
-    if (secondTimer <= 0) {
-      if (minuteTimer <= 0) {
-        // Clears the interval stops the counter
-        clearInterval(minutesInterval);
-        clearInterval(secondsInterval);
-        // Alert message
-        document.getElementById("done").innerHTML =
-          " Time Up!! Take a Break";
-        // Display message
-        document.getElementById("done").classList.add("show_message");
-      }
-      // Reset the session
-      secondTimer = 60;
+function start() {
+    if (interval) {
+        return
     }
-  }
+    interval = setInterval(timer, 1000)
+}
+
+function stop() {
+    clearInterval(interval)
+    interval = null
+}
+
+function reset() {
+    stop()
+    seconds = 0
+    time_el.innerText = '00:00:00'
 }
