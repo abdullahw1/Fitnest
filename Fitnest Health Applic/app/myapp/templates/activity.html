@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<style>
+    body {
+        background-color: #F3F4F6;
+        color: black;
+    }
+</style>
+<button style="border:none;border-radius:9x;"><a href="/dashboard">← </a></button>
+<br>
+<a class="btn btn-outline-warning" href="/todo">To Do List</a>
+
+
+    <h2 class="text-center font-weight-bold">Activity Stats</h2>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6 text-left">
+                <form class="row" id="submit-form">
+                    <div class="form-row">
+                        <div class="col"></div>
+                        <div class="col-3">
+                            <input type="number" name="target" class="form-control rounded target" placeholder="Goal"
+                                   required>
+                        </div>
+                        <div class="col-3">
+                            <input type="number" name="burned" class="form-control rounded calorie burned"
+                                   placeholder="Burned"
+                                   required>
+                        </div>
+                        <div class="col"></div>
+
+                    </div>
+                    <div class="form-row" style="margin-top: 15px; width: 100%">
+                        <div class="col"></div>
+                        <div class="col-4">
+                            <button type="submit"
+                                    class="btn btn-sm btn-1 text-center bg-dark text-white rounded-top rounded-bottom shadow-lg">
+                                Enter
+                            </button>
+                        </div>
+                        <div class="col"></div>
+
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <br>
+        <canvas id="myChart" style="width:100%;max-width:600px;margin: auto"></canvas>
+    </div>
+
+
+
+{% endblock %}
+{% block customjs %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        let xValues = ["Burned", "Remaining"];
+        let yValues = [0, 1];
+        let barColors = [
+            "#eb3425",
+            "#020202",
+        ];
+
+        let calorieChart = new Chart("myChart", {
+            type: "doughnut",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                maintainAspectRatio: true,
+                title: {
+                    display: true,
+                    text: "Calories Burned"
+                },
+
+
+            },
+        });
+
+        $(document).on('submit', '#submit-form', function (event) {
+            event.preventDefault();
+            let target = $('.target').val()
+            let burned = $('.burned').val()
+            let changes = target - burned
+            if (changes > 0) {
+                ajax_chart(calorieChart, [burned, changes], false);
+            } else {
+                ajax_chart(calorieChart, [1, 0], [burned, changes]);
+            }
+        });
+
+        // function to update our chart
+        function percentage(percent, total) {
+            return ((percent * 100) / total).toFixed(0)
+        }
+
+        function ajax_chart(chart, data, pass) {
+            chart.data.datasets[0].data = data; // or you can iterate for multiple datasets
+            let labels = chart.data.labels
+            console.log(data, labels)
+            labels[1] = 'RMN ' + data[1] + ' CAL'
+
+            if (pass) {
+                let bP = percentage(pass[0], Number(pass[0]) + pass[1])
+                labels[1] = 'RMN ' + pass[1] + ' CAL'
+                labels[0] = 'BURNED ' + bP + '%'
+
+
+            } else {
+                let bP = percentage(data[0], Number(data[0]) + data[1])
+                labels[1] = 'RMN ' + data[1] + ' CAL'
+                labels[0] = 'BURNED ' + bP + '%'
+            }
+
+            console.log(chart.data.labels)
+            chart.update(); // finally update our chart
+        }
+    </script>
+
+{% endblock %}
+
