@@ -57,6 +57,12 @@ def home():
     return render_template("homepage.html")
 
 
+@myapp_obj.route("/aboutus")
+def about_us():
+    """About Us route"""
+    return render_template("about-us.html")
+
+
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     """Signup page route"""
@@ -148,6 +154,15 @@ def core_workout():
     """User logged in route and wants to view suggested workouts for their core, this redirects to Core Day page"""
     return render_template("/core-day.html")
 
+
+"""Creating a route for the Gym Dictionary page"""
+@myapp_obj.route("/gym-dictionary")
+@login_required
+def gym_dictionary():
+    """User logged in route and wants to view how to use workout machines, this redirects to Gymtionary page"""
+    return render_template("/gymtionary.html")
+
+
 @myapp_obj.route("/logout")
 @login_required
 def logout():
@@ -157,12 +172,12 @@ def logout():
 
 
 AVATAR_IMGS = {
-    1: 'images/clipart722174.png',
-    2: 'images/clipart722180.png',
-    3: 'images/clipart1236782.png',
-    4: 'images/clipart1236792.png',
-    5: 'images/clipart1237041.png',
-    6: 'images/clipart1237090.png',
+    1: 'images/John_Avatar.png',
+    2: 'images/avatar2.png',
+    3: 'images/Spencer_Avatar.png',
+    4: 'images/Ali_Avatar.png',
+    5: 'images/avatar5.png',
+    6: 'images/Hannah_Avatar.png',
 }
 
 @myapp_obj.route("/account")

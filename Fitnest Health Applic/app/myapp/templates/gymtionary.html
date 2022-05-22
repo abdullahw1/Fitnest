@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gymtionary</title>
+    <style>
+        /************************************************************************************
+        Header
+        *************************************************************************************/
+        header {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        header > .title {
+          align-self: flex-start;
+          border-bottom: 1px solid #000;
+          padding-right: 300px;
+        }
+
+        header > .account {
+          align-self: flex-start;
+        }
+
+        header > .nav {
+          position: absolute;
+          top: 90px;
+        }
+
+        header a {
+          color: black;
+          transition-duration: 0.6s;
+        }
+
+        header a:link {
+          text-decoration: none;
+        }
+
+        .workouts-page > h1 {
+          text-align: center;
+        }
+        /************************************************************************************
+        Gymtionary Page
+        *************************************************************************************/
+        h1 {
+            text-align: center;
+        }
+        .leftSubtitle {
+            position: absolute;
+            left: 25%;
+        }
+        .rightSubtitle {
+            position: absolute;
+            right: 25%;
+        }
+        .leftImage {
+            padding-top: 2.1%;
+            padding-left: 15.625%;
+        }
+        .rightImage {
+            position: absolute;
+            padding-top: 2.1%;
+            right: 9%;
+        }
+        .rightImage2 {
+            position: absolute;
+            padding-top: 2.1%;
+            right: 17.1875%;
+        }
+
+        .legsMachines ul {
+            list-style-type: none;
+            text-align: center;
+            column-count: 2;
+            padding-left: 11%;
+            padding-right: 11%;
+        }
+
+        .backMachines ul {
+            list-style-type: none;
+            text-align: center;
+            column-count: 2;
+            padding-left: 11%;
+            padding-right: 11%;
+        }
+
+    </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="title"><span>Fitnest</span></h1>
+    <div class="account"><a href="/logout">Logout</a></div>
+    <div class="nav"><button style="border:none;border-radius:10px;padding:5px;font-size:28px;"><a href="/dashboard">←</a></button></div>
+  </header>
+
+  <div class="gymtionary-page">
+
+      <h1>Gymtionary</h1>
+      <h2>Legs</h2>
+
+          <h3 class="leftSubtitle">Leg extension/Lying leg curl</h3><h3 class="rightSubtitle">Leg press</h3>
+          <img style="padding-top:2%;padding-left:15.625%;" src="{{url_for('static', filename='images/leg-machine.png')}}" alt="leg machine">
+          <img style="padding-top:2%;" src="{{url_for('static', filename='images/leg-curl.png')}}" alt="leg curl">
+          <img class="rightImage" src="{{url_for('static', filename='images/leg-press.png')}}" alt="leg press">
+          <div class="legsMachines">
+              <ul>
+                  <li>This machine helps targets the quads. Sit on seat with the back of the knees touching the front of the seat.
+                  Place legs under leg bar and slowly raise towards the sky then bring back down.</li>
+                  <li>Targets the quads and glutes. Sit on seat with feet placed shoulder width apart on footstand.
+                  Push side lock handles outwards and bring knees towards chest, slowly push back up ensuring knees do not lock.</li>
+              </ul>
+          </div>
+      <h2>Back</h2>
+
+          <h3 class="leftSubtitle">Lat pull down</h3><h3 class="rightSubtitle">Cable pull down</h3>
+          <img class="leftImage" src="{{url_for('static', filename='images/cable-bar-lateral-pulldown.png')}}" alt="lat pull down">
+          <img class="rightImage2" src="{{url_for('static', filename='images/Straight-Arm-Rope-Pull-Down.png')}}" alt="cable pull down">
+          <div class="backMachines">
+              <ul>
+                  <li>Sit on bench with knees under knee pad; adjust if needed. Place hands on bar around the curved edge with thumbs facing one another.
+                  Slowly bring bar to your chest and make sure to keep back straight, chest out.</li>
+                  <li>Place your feet shoulder width apart with a slight bend in the knees. Grab the rope or bar with a slight bend in the elbows.
+                  Bring down towards the middle of your quads/knees. Keep your head aligned with your spine.</li>
+              </ul>
+          </div>
+
+  </div>
+
+</body>
+</html>
