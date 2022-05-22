@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <button style="border:none;border-radius:9x;"><a href="/dashboard">← </a></button>
-
+ <button style="border:none;border-radius:9x;"><a href="/dashboard">← </a></button>
   <style>
 
     .workouts-page h1 {
@@ -159,6 +158,7 @@
         <th>Name</th>
         <th>Muscle Group</th>
         <th>Duration</th>
+        <th>Description</th>
         <th></th>
       </tr>
 
@@ -169,6 +169,7 @@
         <td>{{ workout.muscle_group | capitalize }}</td>
         <td>{{ workout.duration_hour }} hour, {{ workout.duration_minute }} minute</td>
         <td>{{ workout.description }}</td>
+        <td><a href="/delete-workout?id={{ workout.id }}">Delete</a></td>
       </tr>
 
       {% endfor %}

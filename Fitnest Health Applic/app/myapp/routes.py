@@ -129,6 +129,15 @@ def add_workout():
     """User logged in route and selects add workout button, this redirects to Add a Workout page"""
     return render_template("/add-workout.html", form=form)
 
+@myapp_obj.route("/delete-workout")
+@login_required
+def delete_workout():
+    workout_id = request.args.get('id')
+    if workout_id:
+        Workout.query.filter_by(id=workout_id).delete()
+        db.session.commit()
+        flash("Your workout has been deleted.")
+    return redirect(url_for("my_workouts"))
 
 """Creating a route for the Edit a Workout page"""
 @myapp_obj.route("/edit-workout")
