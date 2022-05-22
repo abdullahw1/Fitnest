@@ -32,3 +32,5 @@ Step 5: Install all the packages and dependencies, which are all found in requir
 Step 6: Simply run the server and enjoy!
 
     % python3 app/run.py
+    
+    On web browser, enter http://127.0.0.1:5025/
