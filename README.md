@@ -3,9 +3,8 @@
 QuickStart: Setting up server
   This app is intend to serve multiple users with one server running. Each user must signup on first use, and login when using the created account. To set    up a server, please follow the instructions below.
   
-===================================================================================================================================================
                                                           Set Up Instructions
-===================================================================================================================================================                                                          
+                                                          
 Step 1: Clone the GitHub Repo: % git clone https://github.com/HoaTNNguyen/Study2Success.git
 
 Step 2: Make sure you have installed a version of python >= Python 3.8.5 
