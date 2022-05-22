@@ -46,7 +46,7 @@ class Friend(db.Model):
 
 
 def _get_default_avatar():
-    default_cat_img = os.path.join(basedir, './static/images/clipart722180.png')
+    default_cat_img = os.path.join(basedir, './static/images/John_Avatar.png')
     assert os.path.exists(default_cat_img), f'"{default_cat_img}" does not exists'
     with open(default_cat_img, 'rb') as fp:
         return fp.read()
@@ -68,7 +68,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(64))
     avatar = db.Column(db.LargeBinary, default=_get_default_avatar())
-    notes = db.relationship('Note', backref='user', lazy='dynamic')
+    journals = db.relationship('Journal', backref='user', lazy='dynamic')
     friends1 = db.relationship('Friend', backref='user1' , lazy='dynamic', foreign_keys=[Friend.user1_id])
     friends2 = db.relationship('Friend', backref='user2' , lazy='dynamic', foreign_keys=[Friend.user2_id])
 
@@ -103,39 +103,55 @@ def load_user(id):
 
 
 
-class Note(db.Model):
-    """Database table for notes
+class Journal(db.Model):
+    """Database table for journals
 
      Attributes:
          id: Primary key
-         name: String column, title of note
+         name: String column, title of journal
          data: text column, containing files data
-         User: id if user who added notes
+         User: id if user who added journals
      """
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     data = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    sharings = db.relationship('SharedNote', backref='note', cascade='all, delete')
+    sharings = db.relationship('SharedJournal', backref='journal', cascade='all, delete')
     def __repr__(self):
         return f'<{self.name}   {self.data}>'
 
 
-class SharedNote(db.Model):
-    """Saves sharing information of notes
+class SharedJournal(db.Model):
+    """Saves sharing information of journals
 
     Attributes:
         id: Primary key
         datetime: Datetime column, time of sharing
-        note_id: Integer column, id of note that is shared
-        owner_user_id: Integer column, id of person sharing the note
-        target_user_id: Integer column, id of person that was shared with the note
+        journal_id: Integer column, id of journal that is shared
+        owner_user_id: Integer column, id of person sharing the journal
+        target_user_id: Integer column, id of person that was shared with the journal
     """
     id = db.Column(db.Integer, primary_key=True)
     datetime = db.Column(db.DateTime)
-    note_id = db.Column(db.Integer, db.ForeignKey('note.id'))
+    journal_id = db.Column(db.Integer, db.ForeignKey('journal.id'))
     owner_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     target_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner_user = db.relationship('User', foreign_keys=[owner_user_id])
     target_user = db.relationship('User', foreign_keys=[target_user_id])
+
+class Workout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    muscle_group = db.Column(db.String)
+    duration_hour = db.Column(db.Integer)
+    duration_minute = db.Column(db.Integer)
+    sets = db.Column(db.Integer)
+    reps = db.Column(db.Integer)
+    description = db.Column(db.Text)
+    owner_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+
+
+

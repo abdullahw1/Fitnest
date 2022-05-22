@@ -1,12 +1,13 @@
 /*  */
 
 #base-navbar .navbar-brand {
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 #base-navbar a {
     color: rgba(255, 255, 255, 0.7);
 }
+
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
 .snip1217 {
     font-family: 'Raleway', Arial, sans-serif;
@@ -73,7 +74,7 @@
 }
 
 .snip1217 .my_dropdown {
-    background-color: rgba(0,0,0,0.87);
+    background-color: rgba(0, 0, 0, 0.87);
     padding: 10px 15px;
     position: relative;
 }
@@ -99,7 +100,7 @@
 }
 
 .words {
-    color: rgba(0,0,0,0.6);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 0;
 }
 
@@ -168,4 +169,225 @@
 
 .words span:nth-child(13) {
     animation-delay: 3.0s;
+}
+
+.calorie {
+    outline: none;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+    outline: 0 !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+
+}
+button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-1 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: transparent;
+    width: 80px ;
+    height: 30px;
+    font-weight: 700;
+    -webkit-transition: background-color .3s ease-in-out;
+    transition: background-color .3s ease-in-out;
+    margin-right: 20vw;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+ .words.word-1 {
+    color: rgba(0,0,0,0.5);
+     font-size:50px;
+ }
+
+ body{
+    font-family: 'Poppins', sans-serif;
+}
+
+@media screen and (max-width: 370px){
+    body {
+        font-size: 12px;
+    }
+}
+
+#homeImage {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+#homeDesc {
+    margin: auto;
+    margin-top: 2.5%;
+    margin-right: 65%;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a {
+    transition-duration: 0.6s;
+}
+
+.container.details {
+    padding-bottom:0px;
+    padding-left: 0px;
+}
+
+.h2, h2 {
+    font-size: 2rem;
+    margin: 10px;
+    /* margin-bottom: 10px;  */
+    padding: 30px 0px;
+}
+
+.icon-bar {
+    text-align: center;
+}
+
+.flashcards {
+    background-color:#FFE5D9;
+    border-radius: 5%;
+    height: 40rem;
+}
+
+.journals {
+    background-color: #F1E3EE;
+    border-radius: 5%;
+    height: 40rem;
+}
+
+.pomodoro {
+    background-color: #D8EBE4;
+    border-radius: 5%;
+    height: 40rem;
+}
+
+.todo-list {
+    background-color: #B5EAEA;
+    border-radius: 5%;
+    height: 40rem;
+}
+
+.pl-md-3, .px-md-3 {
+    padding-left: 0rem!important;
+}
+
+img.logan-stick {
+    height:25px;
+    margin-top:-10px;
+}
+
+a.logan-started {
+    text-decoration: none;
+    background-color: #29A7A7;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 10px;
+}
+
+img.logan-img {
+    width: 100%;
+}
+
+.swiper-slide .card {
+    min-height: 400px;
+}
+
+.row.justify-content-center {
+    margin-top: 20px;
+}
+
+ @media (min-width: 768px){
+     body {
+         font-size: 1vw;
+     }
+.container.wrapper {
+    margin-top: 100px;
+}
+     div.col-8.mx-auto.col-md-4.order-md-2.col-lg-5 {
+         margin-left: 20px !important;
+     }
+ img.logan-img {
+     height: 300px !important;
+ }
+ div.logan {
+     margin-top: 60px;
+ }
+ h1.logan-top {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 50px;
+}
+
+p.lead {
+    font-weight: lighter;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.flashcards {
+    height: 500px;
+    margin-left: -15px;
+}
+
+.journals {
+    height: 500px;
+    margin-left: -15px;
+}
+
+.pomodoro {
+    height: 500px;
+    margin-left: -15px;
+}
+
+.todo-list {
+    height: 500px;
+    margin-left: -15px;
+}
+
+.pb-md-4, .py-md-4 {
+    padding-bottom: 1.5rem!important;
+    margin-right: 50px;
+}
+
+.h2.display-5.fw-normal.heading {
+    margin-top:50px;
+}
+.container.image {
+    height: 300px;
+}
+.card-body {
+    height: 200px;
+}
 }

@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
 <h1 style="color:white;margin-top:4%;">Welcome to Fitnest</h1>
 <img id="homeImage",
      src="{{url_for('static', filename='images/Weight_Lifting_Barbell.png')}}",
@@ -11,7 +16,7 @@
         Going to the gym can be overwhelming for new gym-goers, and we're here to help!
     </p>
     <button style="margin-top:5%;width:35%;padding:5px;border:none;border-radius:10px;font-size:32px;text-align:center;">
-        <a href="/aboutus">About Us</a>
+        <a href="/about-us">About Us</a>
     </button>
 </div>
 {% endblock %}

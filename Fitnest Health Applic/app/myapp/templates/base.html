@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% block styles %}
     <!-- Bootstrap CSS -->
     {{ bootstrap.load_css() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}"> {% endblock %}
 
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='base.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='homepage-style.css')}}"> {% endblock %}
     {% block swiper %} {% endblock %}
 
     <title>
@@ -36,36 +35,6 @@
             <span class="navbar-toggler-icon"></span>
         </button> -->
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="snip1217 navbar-nav mr-auto">
-                {% if current_user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="/my-friends">Friends</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Workouts
-                    </a>
-                    <div class="my_dropdown dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/my-workouts">Workouts</a>
-                        <a class="dropdown-item" href="/flashcards-sharing">See activity</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/add-workout">Create a workout</a>
-                        <a class="dropdown-item" href="/import-flashcard">Start workout</a>
-                        <a class="dropdown-item" href="/learn-flashcard">Learn workout</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="/pomodoro">Timer</a></li>
-                <li class="nav-item"><a class="nav-link" href="/todo">ToDo List</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Journal
-                    </a>
-                    <div class="my_dropdown dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/note">My Journal</a>
-                        <a class="dropdown-item" href="/notes-sharing"> Sharing</a>
-                </li>
-                {% endif %}
             </ul>
             <ul class="snip1217 navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
@@ -80,6 +49,8 @@
                             </span>
                     </a>
                     <div class="my_dropdown dropdown-menu" style="right:0; left:auto;" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/about-us">About Us</a>
+
                         <a class="dropdown-item" href="/account">Account</a>
                         <a class="dropdown-item" href="/logout">Log out</a>
                 </li>
@@ -121,8 +92,10 @@
     </div>
 
     {% block scripts %}
-    <!-- Optional JavaScript -->
-    {{ bootstrap.load_js() }} {% endblock %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }} {% endblock %}
+    {% block customjs %}
+    {% endblock %}
 </body>
 
 </html>
