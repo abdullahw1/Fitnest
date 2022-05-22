@@ -85,7 +85,7 @@ class UploadMarkdownForm(FlaskForm):
         file: Markdown file field to select markdown file to upload
         upload: Submit button to confirm upload
     """
-    file = FileField('Select markdown file:', validators=[FileRequired(), FileAllowed(['md','txt'])])
+    file = FileField('Select .txt file:', validators=[FileRequired(), FileAllowed(['md','txt'])])
     upload = SubmitField('Upload')
 
 
@@ -101,20 +101,20 @@ class SearchForm(FlaskForm):
 
 
 
-class NoteForm(FlaskForm):
-    '''WTForm for upload markdown file to notes page and later converting to pdf
+class JournalForm(FlaskForm):
+    '''WTForm for upload file to journal page and later converting to pdf
 
     Attributes:
-        name: note name
-        note: note file
+        name: journal name
+        journal: journal file
         submit: Submit field to add card
     '''
     name = StringField('name', validators={DataRequired()})
-    note = FileField('file', validators={DataRequired()})
+    journals = FileField('file', validators={DataRequired()})
     submit = SubmitField('submit')
     
-class NoteShareForm(FlaskForm):
-    """WTForm for user to select which friend to share note
+class JournalShareForm(FlaskForm):
+    """WTForm for user to select which friend to share journal
 
     Attributes:
         dropdown: Dropdown to select friend's username
