@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
 <html lang="en">
 <head>
+    <button style="border:none;border-radius:9x;"><a href="/dashboard">← </a></button>  </header>
     <title>Gymtionary</title>
     <style>
         /************************************************************************************
@@ -49,24 +51,35 @@
         }
         .leftSubtitle {
             position: absolute;
-            left: 25%;
+            left: 20%;
         }
         .rightSubtitle {
             position: absolute;
             right: 25%;
         }
         .leftImage {
-            padding-top: 2.1%;
+            width: 600px;
+            height:auto;
+
+            padding-top: 90px;
             padding-left: 15.625%;
         }
         .rightImage {
+            width: 600px;
+            height:auto;
+
             position: absolute;
-            padding-top: 2.1%;
+            padding-top: 90px;
             right: 9%;
         }
+        /*
+        CABLE PULL DOWN
+        */
         .rightImage2 {
+            max-width:400px;
+            height:auto;
             position: absolute;
-            padding-top: 2.1%;
+            padding-top: 90px;
             right: 17.1875%;
         }
 
@@ -74,7 +87,7 @@
             list-style-type: none;
             text-align: center;
             column-count: 2;
-            padding-left: 11%;
+            padding-left: 9%;
             padding-right: 11%;
         }
 
@@ -91,19 +104,14 @@
 <body>
 
   <header>
-    <h1 class="title"><span>Fitnest</span></h1>
-    <div class="account"><a href="/logout">Logout</a></div>
-    <div class="nav"><button style="border:none;border-radius:10px;padding:5px;font-size:28px;"><a href="/dashboard">←</a></button></div>
-  </header>
-
   <div class="gymtionary-page">
 
       <h1>Gymtionary</h1>
       <h2>Legs</h2>
 
           <h3 class="leftSubtitle">Leg extension/Lying leg curl</h3><h3 class="rightSubtitle">Leg press</h3>
-          <img style="padding-top:2%;padding-left:15.625%;" src="{{url_for('static', filename='images/leg-machine.png')}}" alt="leg machine">
-          <img style="padding-top:2%;" src="{{url_for('static', filename='images/leg-curl.png')}}" alt="leg curl">
+
+          <img style="padding-top:2%; padding-left: 18%; padding-top: 60px;" src="{{url_for('static', filename='images/leg-curl.png')}}" alt="leg curl">
           <img class="rightImage" src="{{url_for('static', filename='images/leg-press.png')}}" alt="leg press">
           <div class="legsMachines">
               <ul>
@@ -116,7 +124,7 @@
       <h2>Back</h2>
 
           <h3 class="leftSubtitle">Lat pull down</h3><h3 class="rightSubtitle">Cable pull down</h3>
-          <img class="leftImage" src="{{url_for('static', filename='images/cable-bar-lateral-pulldown.png')}}" alt="lat pull down">
+          <img class="leftImage" src="{{url_for('static', filename='images/cable-bar-lateral-pulldown.jpg')}}" alt="lat pull down">
           <img class="rightImage2" src="{{url_for('static', filename='images/Straight-Arm-Rope-Pull-Down.png')}}" alt="cable pull down">
           <div class="backMachines">
               <ul>
@@ -131,3 +139,4 @@
 
 </body>
 </html>
+{% endblock %}
