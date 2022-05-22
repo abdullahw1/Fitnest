@@ -30,6 +30,15 @@
       top: 90px;
     }
 
+    header a {
+      color: black;
+      transition-duration: 0.6s;
+    }
+
+    header a:link {
+      text-decoration: none;
+    }
+
     .workouts-page > h1 {
       text-align: center;
     }
@@ -180,7 +189,7 @@
   <header>
     <h1 class="title"><span>Fitnest</span></h1>
     <div class="account"><a href="/logout">Logout</a></div>
-    <div class="nav"><a href="/dashboard">Back</a></div>
+    <div class="nav"><button style="border:none;border-radius:10px;padding:5px;font-size:28px;"><a href="/dashboard">←</a></button></div>
   </header>
 
   <div class="workouts-page">

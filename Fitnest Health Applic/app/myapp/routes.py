@@ -1,7 +1,7 @@
 """This module holds all the flask routes of our app (all URL paths) 
-and incharge of the frontend for rendering html templates.
+and in charge of the frontend for rendering html templates.
 
-The standarn convention of defining a route here is:
+The standard convention of defining a route here is:
 
 ```python
 @myapp_obj.route("/my-route")
@@ -153,6 +153,15 @@ def upperbody_workout():
 def core_workout():
     """User logged in route and wants to view suggested workouts for their core, this redirects to Core Day page"""
     return render_template("/core-day.html")
+
+
+"""Creating a route for the Gymtionary page"""
+@myapp_obj.route("/gym-dictionary")
+@login_required
+def gym_dictionary():
+    """User logged in and wants to view machine?"""
+    return render_template("/gymtionary.html")
+
 
 @myapp_obj.route("/logout")
 @login_required
