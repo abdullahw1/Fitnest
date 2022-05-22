@@ -1,5 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+
+  {% block header %}
+  <h1>{% block title %}Leg Day{% endblock %}</h1>
+{% endblock %}
+  {% block content %}
 <head>
     <title>Leg Day</title>
      <style>
@@ -72,9 +77,7 @@
 
     <div class="createWorkout-page">
     <header>
-         <h1 class="title"><span>Fitnest</span></h1>
-         <div class="account"><a href="/logout">Logout</a></div>
-        <div class="nav"><a href="/my-workouts">Back</a></div>
+          <button style="border:none;border-radius:9x;"><a href="/my-workouts">← </a></button>
     </header>
         <div class="legday">
              <h1>Leg Day</h1>
@@ -105,7 +108,8 @@
     </div>
 
         <p1><strong>The perfect leg workout - 8 Best leg exercises</strong></p1>
-        <p2><strong>30 minute full leg workout at home (Dumbells only)</strong></p2>
+        <p2><strong>30 minute full leg workout at home (Dumbbells only)</strong></p2>
 
 </body>
 </html>
+{% endblock %}

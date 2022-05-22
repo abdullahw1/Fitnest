@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Notes Sharing</h1>
+<h1>Journals Sharing</h1>
 <br>
-<h2>Notes | Shared With Others</h2>
+<h2>Journals | Shared With Others</h2>
 <p>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Notes</th>
+            <th scope="col">Journals</th>
             <th scope="col">Shared With</th>
             <th scope="col">Shared On</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        {% for x in owner_notes %}
+        {% for x in owner_journals %}
         <tr>
-            <th scope="row">{{ x.note.id }}</th>
+            <th scope="row">{{ x.journal.id }}</th>
             <td>
                 <p>
-                    <b>{{ x.note.name}}</b>
+                    <b>{{ x.journal.name}}</b>
                 </p>
             </td>
             <td>
@@ -35,7 +35,7 @@
             </td>
             <td>
                 <p>
-                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Cancel
+                    <a class="btn btn-outline-danger" href="/journals-sharing/cancel-sharing/{{ x.id }}">Cancel
                         Sharing</a>
                 </p>
             </td>
@@ -45,25 +45,25 @@
 </table>
 </p>
 <hr>
-<h2>Notes | Shared With Me</h2>
+<h2>Journals | Shared With Me</h2>
 <p>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Notes</th>
+            <th scope="col">Journals</th>
             <th scope="col">Shared By</th>
             <th scope="col">Shared On</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        {% for x in target_notes %}
+        {% for x in target_journals %}
         <tr>
-            <th scope="row">{{ x.note.id }}</th>
+            <th scope="row">{{ x.journal.id }}</th>
             <td>
                 <p>
-                    <b>{{ x.note.name}}</b>
+                    <b>{{ x.journal.name}}</b>
                 </p>
             </td>
             <td>
@@ -78,9 +78,9 @@
             </td>
             <td>
                 <p>
-                    <a class="btn btn-outline-success" href="/notes-sharing/add-to-mynotes/{{ x.id }}">Add To My
-                        Notes</a>
-                    <a class="btn btn-outline-danger" href="/notes-sharing/cancel-sharing/{{ x.id }}">Cancel
+                    <a class="btn btn-outline-success" href="/journals-sharing/add-to-myjournals/{{ x.id }}">Add To My
+                        Journals</a>
+                    <a class="btn btn-outline-danger" href="/journals-sharing/cancel-sharing/{{ x.id }}">Cancel
                         Sharing</a>
                 </p>
             </td>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #F3F4F6;
+        color: black;
+    }
+</style>
+<button style="border:none;border-radius:9x;"><a href="/dashboard">← </a></button>
+
+<h1><center>My Journal</center></h1>
+<br>
+<a class="btn btn-outline-success" href="/todo">To-Do List</a><a class="btn btn-outline-warning" href="/journals-sharing">View Shared Journals</a>
+<br>
+<br>
+{{ render_form(search_form, form_type="inline", novalidate=True) }}
+<br>
+<a class="btn btn-outline-primary" href="/upload-journal">Upload New Journal</a>
+<br>
+
+
+<div class="container-fluid">
+    <div class="row">
+        {% if journal %}
+        <div class="col-12 col-md-3">
+        {% else %}
+        <div class="col-12">
+        {% endif %}
+            <table class="table">
+                <thread>
+                    <tr>
+                        <th scope="col">Filename</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for posted_journal in posted_journals %}
+                    <tr>
+                        <td>
+                            {{ posted_journal.name }}
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="/viewJournal/{{ posted_journal.id }}">View</a>
+                            <a class="btn btn-outline-danger" href="/download-journal-as-pdf/{{ posted_journal.id }}">&#11015; Delete</a>
+                            <a class="btn btn-outline-info" href="/share-journals/{{ posted_journal.id }}">Share </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if journal %}
+        <div class="col-12 col-md-9">
+            <h2 style='text-align: center; border: 1px solid;'>{{ journal.name }}</h2>
+            <div class='container-fluid' style='background-color:#F2EFFB; border: 1px solid;'>
+                {{ html_text|safe }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+        
+
+
+
+{% endblock %}
