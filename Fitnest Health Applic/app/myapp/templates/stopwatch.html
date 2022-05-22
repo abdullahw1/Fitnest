@@ -1,31 +1,37 @@
-<!DOCTYPE html>
-<html Lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,
-    initial-scale=1.0">
-    <title>Stopwatch</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="main.css"/>
+{% block head %}
+{{ super() }}
+{% endblock %}
 
 
+{% block styles %}
+{{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
+{% endblock %}
 
-</head>
-<body>
 
+{% block scripts %}
+{{ super() }}
+<script src="{{url_for('static',filename='main.js')}}"></script>
+<script src="https://kit.fontawesome.com/996973c893.js"></script>
+{% endblock %}
+
+{% block content %}
     <div class="watch">
-        <div class="time">
-            00:00:00
-        </div>
-        <div class="controls">
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <button id="reset">Reset</button>
-        </div>
+    <div class="time">
+        00:00:00
+    </div>
+    <div class="controls">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+    </div>
     </div>
 
-
-    <script src="stopwt.js"></script>
-</body>
-</html>
+{% endblock %}

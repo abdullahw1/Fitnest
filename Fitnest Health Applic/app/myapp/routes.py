@@ -1,7 +1,7 @@
 """This module holds all the flask routes of our app (all URL paths) 
-and incharge of the frontend for rendering html templates.
+and the frontend for rendering html templates.
 
-The standarn convention of defining a route here is:
+The standard convention of defining a route here is:
 
 ```python
 @myapp_obj.route("/my-route")
@@ -38,9 +38,9 @@ from werkzeug.utils import secure_filename
 
 
 from myapp import myapp_obj, db
-from myapp.forms import SignupForm, LoginForm, UploadMarkdownForm, SearchForm, NextButton, ObjectiveForm, NoteForm, NoteShareForm, AddWorkoutForm
-from myapp.models import User, Friend, FriendStatusEnum, Todo, Note, SharedNote, Workout
-from myapp.models_methods import get_friend_status, get_all_friends
+from myapp.forms import *
+from myapp.models import *
+from myapp.models_methods import *
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -75,7 +75,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created. You can now login")
-        return redirect(url_for("home"))
+        return redirect('/dashboard')
 
     return render_template("signup.html", form=form)
 
@@ -135,7 +135,7 @@ def add_workout():
 @login_required
 def edit_workout():
     """User logged in route and selects edit workout button, this redirects to Edit a Workout page"""
-    return render_template("/edit-workout.html")
+    return render_template("/my-workouts.html")
 
 
 """Creating a route for the Edit a Workout page"""
@@ -204,7 +204,7 @@ def change_avatar(avatar_id):
 
 
 
-# Friends
+# functions for Friends
 @myapp_obj.route("/my-friends", methods=['GET', 'POST'])
 @login_required
 def show_friends():
@@ -310,17 +310,23 @@ def remove_friend_userid_provided(user_id):
 
 
 #Pomodoro app
-@myapp_obj.route("/pomodoro")
-def tomato():
-    """Show Pomodoro timer route"""
-    return render_template("/pomodoro.html")
-#stopwatch app
+#@myapp_obj.route("/pomodoro")
+#def tomato():
+#    """Show Pomodoro timer route"""
+#    return render_template("/pomodoro.html")
+
+# stopwatch app
 @myapp_obj.route("/stopwatch")
 def stopwatch():
     """Show stopwatch route"""
     return render_template("/stopwatch.html")
 
-# Todo app
+
+@myapp_obj.route("/activity")
+def activity():
+    return render_template("activity.html")
+
+#Todo feature
 @myapp_obj.route("/todo")
 @login_required
 def myTodo():
@@ -369,130 +375,131 @@ def page_not_found(e):
 myapp_obj.register_error_handler(404, page_not_found)
 
 
-@myapp_obj.route("/note", methods=['GET', 'POST'])
+@myapp_obj.route("/journal", methods=['GET', 'POST'])
 @login_required
-def show_notes():
-    """ Route to view a users notes"""
-    return redirect(url_for('view_notes', note_id=0)) # note_id 0 indicate no note to view
+def show_journals():
+    """ Route to view a users journals"""
+    return redirect(url_for('view_journal', journal_id=0)) # journal_id 0 indicate no journal to view
 
 
-@myapp_obj.route("/viewNote/<int:note_id>", methods=['GET', 'POST'])
+@myapp_obj.route("/viewJournal/<int:journal_id>", methods=['GET', 'POST'])
 @login_required
-def view_notes(note_id):
-    '''Route to view note, this is similar to show_notes '''
-    note = None
+def view_journal(journal_id):
+    '''Route to view journal, this is similar to show_journal '''
+    journal = None
     html_text = None
-    posted_notes = []
+    posted_journals = []
     search_text = request.form.get('text')
     user_id = current_user.get_id()
     search_form = SearchForm()
     if search_text:
-        notes = Note.query.filter_by(user_id=current_user.get_id()).filter(Note.data.contains(search_text)).all()
-        if notes:
-            flash(f'{len(notes)} search results found')
+        journals = Journal.query.filter_by(user_id=current_user.get_id()).filter(Journal.data.contains(search_text)).all()
+        if journals:
+            flash(f'{len(journals)} search results found')
         else:
             flash('No search results found', "error")
     else:
-        notes = Note.query.filter_by(user_id=current_user.get_id()).all()
-        if note_id != 0:
-            note = Note.query.filter_by(id=note_id, user_id=current_user.get_id()).one_or_none()
-            html_text =  markdown.markdown(note.data)
-    for x in notes:
-        posted_notes = posted_notes + [{'name':f'{x.name}','id':f'{x.id}'}]
-    return render_template('note.html', title='Note', posted_notes=posted_notes, note=note, html_text=html_text, user_id=user_id, search_form=SearchForm())
+        journals = Journal.query.filter_by(user_id=current_user.get_id()).all()
+        if journal_id != 0:
+            journal = Journal.query.filter_by(id=journal_id, user_id=current_user.get_id()).one_or_none()
+            html_text =  markdown.markdown(journal.data)
+    for x in journals:
+        posted_journals = posted_journals + [{'name':f'{x.name}','id':f'{x.id}'}]
+    return render_template('journal.html', title='Journal', posted_journals=posted_journals, journal=journal, html_text=html_text, user_id=user_id, search_form=SearchForm())
 
 
-@myapp_obj.route("/download-note-as-pdf/<int:note_id>", methods=['GET', 'POST'])
+@myapp_obj.route("/download-journal-as-pdf/<int:journal_id>", methods=['GET', 'POST'])
 @login_required
-def download_note_as_pdf(note_id):
-    '''Route will allow for html note to be downloaded as pdf in the md file in a pdf directory'''
-    note = Note.query.filter_by(id=note_id, user_id=current_user.get_id()).one_or_none()
-    if not note:
-        abort(404, description=f"Note with id {note_id} doesn't exists")
-    html_text = markdown.markdown(note.data)
-    output_filename = note.name.split(".md")
-    output_filename = output_filename[0] + '.pdf'
-    with tempfile.TemporaryDirectory() as temp_dir:
-        pdf_filename = os.path.join(temp_dir, output_filename)
-        # Convert html to pdf
-        with open(pdf_filename, "wb+") as fp:
-            pisa_status = pisa.CreatePDF(html_text, dest=fp)
-        return send_file(pdf_filename, as_attachment=True)
+def download_journal_as_pdf(journal_id):
+    '''Route will allow for html journal to be downloaded as pdf in the md file in a pdf directory'''
+    journal = Journal.query.filter_by(id=journal_id, user_id=current_user.get_id()).one_or_none()
+    db.session.delete(journal)
+    db.session.commit()
+    return redirect(url_for("show_journals"))
 
 
-@myapp_obj.route("/upload-note", methods=['GET', 'POST'])
+
+@myapp_obj.route("/upload-journal", methods=['GET', 'POST'])
 @login_required
-def upload_note():
-    """Import note route, for user to import markdown file into note"""
+def upload_journal():
+    """Import journal route, for user to import markdown file into journal"""
     form = UploadMarkdownForm()
     if form.validate_on_submit():
         n = form.file.data
         filename = n.filename
         content = n.stream.read().decode('ascii')
-        note = Note(name=filename, data=content, user_id=current_user.get_id())
-        db.session.add(note)
+        journal = Journal(name=filename, data=content, user_id=current_user.get_id())
+        db.session.add(journal)
         db.session.commit()
         flash(f'Uploaded Journal {filename} ')
-        return redirect(url_for("show_notes"))
-    return render_template("import-note.html", form=form)
+        return redirect(url_for("show_journals"))
+    return render_template("import-journal.html", form=form)
 
 
-@myapp_obj.route("/share-notes/<int:note_id>", methods=['GET', 'POST'])
+@myapp_obj.route("/share-journals/<int:journal_id>", methods=['GET', 'POST'])
 @login_required
-def share_note(note_id):
-    ''' route will allow user to share note to other users(friends)'''
-    note = Note.query.filter_by(id=note_id).one_or_none()
+def share_journal(journal_id):
+    ''' route will allow user to share journals to other users(friends)'''
+    journal = Journal.query.filter_by(id=journal_id).one_or_none()
     friends = []
     for status, oth_user in get_all_friends(current_user.get_id()):
         if status == 'friend':  # Only find friends
             friends.append(oth_user)
-    form = NoteShareForm()
+    form = JournalShareForm()
     form.dropdown.choices = [(u.id, u.username) for u in friends]
     if form.validate_on_submit():
         user = User.query.filter_by(id=form.dropdown.data).one()
         now = datetime.now()
-        shared_note = SharedNote(note_id=note_id, datetime=now, owner_user_id=current_user.get_id(), target_user_id=user.id)
-        db.session.add(shared_note)
+        shared_journal = SharedJournal(journal_id=journal_id, datetime=now, owner_user_id=current_user.get_id(), target_user_id=user.id)
+        db.session.add(shared_journal)
         db.session.commit()
-        flash(f'Shared Journal "{shared_note.note.name}" to "{user.username}" on {str(datetime.now())}')
-        return redirect(url_for("show_notes"))
-    return render_template("share-notes.html", note=note, form=form)
+        flash(f'Shared Journal "{shared_journal.journal.name}" to "{user.username}" on {str(datetime.now())}')
+        return redirect(url_for("show_journals"))
+    return render_template("share-journals.html", journal=journal, form=form)
 
 
-@myapp_obj.route("/notes-sharing", methods=['GET', 'POST'])
+@myapp_obj.route("/journals-sharing", methods=['GET', 'POST'])
 @login_required
-def notes_sharing():
-    """A route for viewing sharing status of notes (both shared to others and others shared to me)"""
-    owner_notes = SharedNote.query.filter_by(owner_user_id=current_user.get_id()).all()
-    target_notes = SharedNote.query.filter_by(target_user_id=current_user.get_id()).all()
-    return render_template("notes-sharing.html", owner_notes=owner_notes, target_notes=target_notes)
+def journals_sharing():
+    """A route for viewing sharing status of journals (both shared to others and others shared to me)"""
+    owner_journals = SharedJournal.query.filter_by(owner_user_id=current_user.get_id()).all()
+    target_journals = SharedJournal.query.filter_by(target_user_id=current_user.get_id()).all()
+    return render_template("journals-sharing.html", owner_journals=owner_journals, target_journals=target_journals)
 
 
-@myapp_obj.route("/notes-sharing/add-to-mynotes/<int:sharing_id>", methods=['GET', 'POST'])
+@myapp_obj.route("/journals-sharing/add-to-myjournals/<int:sharing_id>", methods=['GET', 'POST'])
 @login_required
-def notes_sharing_add_to_mynotes(sharing_id):
-    """A route for adding shared note that other user shared into My Notes"""
-    sharing = SharedNote.query.get(sharing_id)
+def journals_sharing_add_to_myjournals(sharing_id):
+    """A route for adding shared journals that other user shared into My journals"""
+    sharing = SharedJournal.query.get(sharing_id)
     if int(current_user.get_id()) != sharing.owner_user_id and\
         int(current_user.get_id()) != sharing.target_user_id:
         abort(404, description='Invalid permission')
-    note = Note(name=sharing.note.name, data=sharing.note.data, user_id=current_user.get_id())
-    db.session.add(note)
+    journal = Journal(name=sharing.journal.name, data=sharing.journal.data, user_id=current_user.get_id())
+    db.session.add(journal)
     db.session.commit()
-    flash(f'Copied note(#{sharing.note.id}) to "My Notes", new note(#{note.id})')
-    return redirect(url_for('notes_sharing'))
+    flash(f'Copied journal(#{sharing.journal.id}) to "My Journals", new journal(#{journal.id})')
+    return redirect(url_for('journals_sharing'))
 
 
-@myapp_obj.route("/notes-sharing/cancel-sharing/<int:sharing_id>", methods=['GET', 'POST'])
+@myapp_obj.route("/journals-sharing/cancel-sharing/<int:sharing_id>", methods=['GET', 'POST'])
 @login_required
-def notes_sharing_cancel_sharing(sharing_id):
-    """A route for cancelling a flashcard sharing"""
-    sharing = SharedNote.query.get(sharing_id)
+def journals_sharing_cancel_sharing(sharing_id):
+    """A route for cancelling a journals sharing"""
+    sharing = SharedJournal.query.get(sharing_id)
     if int(current_user.get_id()) != sharing.owner_user_id and\
         int(current_user.get_id()) != sharing.target_user_id:
         abort(404, description='Invalid permission')
-    flash(f'Sharing of note(#{sharing.note.id}) cancelled')
+    flash(f'Sharing of journal(#{sharing.journal.id}) cancelled')
     db.session.delete(sharing)
     db.session.commit()
-    return redirect(url_for('notes_sharing'))
+    return redirect(url_for('journals_sharing'))
 
+@myapp_obj.route("/delete-journal/<int:todo_id>")
+@login_required
+def delete_journal(journal_id):
+    """Remove journal item from ToDo list, then redirect back to show ToDo list"""
+    journal = Journal.query.filter_by(id=journal_id).one_or_none()
+    db.session.delete(journal)
+    db.session.commit()
+    return redirect(url_for("myTodo"))
