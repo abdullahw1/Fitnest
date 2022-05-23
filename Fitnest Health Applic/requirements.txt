@@ -123,6 +123,7 @@ pyobjc-framework-CoreSpotlight==8.0
 pyobjc-framework-CoreText==8.0
 pyobjc-framework-CoreWLAN==8.0
 pyobjc-framework-CryptoTokenKit==8.0
+pyobjc-framework-DataDetection==8.0
 pyobjc-framework-DeviceCheck==8.0
 pyobjc-framework-DictionaryServices==8.0
 pyobjc-framework-DiscRecording==8.0
@@ -147,6 +148,7 @@ pyobjc-framework-InputMethodKit==8.0
 pyobjc-framework-InstallerPlugins==8.0
 pyobjc-framework-InstantMessage==8.0
 pyobjc-framework-Intents==8.0
+pyobjc-framework-IntentsUI==8.0
 pyobjc-framework-IOSurface==8.0
 pyobjc-framework-iTunesLibrary==8.0
 pyobjc-framework-KernelManagement==8.0
@@ -155,6 +157,8 @@ pyobjc-framework-LaunchServices==8.0
 pyobjc-framework-libdispatch==8.0
 pyobjc-framework-LinkPresentation==8.0
 pyobjc-framework-LocalAuthentication==8.0
+pyobjc-framework-LocalAuthenticationEmbeddedUI==8.0
+pyobjc-framework-MailKit==8.0
 pyobjc-framework-MapKit==8.0
 pyobjc-framework-MediaAccessibility==8.0
 pyobjc-framework-MediaLibrary==8.0
@@ -164,6 +168,7 @@ pyobjc-framework-Metal==8.0
 pyobjc-framework-MetalKit==8.0
 pyobjc-framework-MetalPerformanceShaders==8.0
 pyobjc-framework-MetalPerformanceShadersGraph==8.0
+pyobjc-framework-MetricKit==8.0
 pyobjc-framework-MLCompute==8.0
 pyobjc-framework-ModelIO==8.0
 pyobjc-framework-MultipeerConnectivity==8.0
@@ -194,6 +199,7 @@ pyobjc-framework-Security==8.0
 pyobjc-framework-SecurityFoundation==8.0
 pyobjc-framework-SecurityInterface==8.0
 pyobjc-framework-ServiceManagement==8.0
+pyobjc-framework-ShazamKit==8.0
 pyobjc-framework-Social==8.0
 pyobjc-framework-SoundAnalysis==8.0
 pyobjc-framework-Speech==8.0
