@@ -33,4 +33,4 @@ Step 6: Simply run the server and enjoy!
 
     % python3 app/run.py
     
-    On web browser, enter http://127.0.0.1:5025/
+    On web browser, enter http://127.0.0.1:5012/
