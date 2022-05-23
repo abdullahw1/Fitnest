@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Import Journal</h1>
+<button style="border:none;border-radius:9x;"><a href="/journal">← </a></button>
+<h1><Center>Import Journal</Center></h1>
 {{ render_form(form, button_style="info", novalidate=True) }}
-<a class="btn btn-info mt-1" href="/journal">Back</a>
 {% endblock %}
