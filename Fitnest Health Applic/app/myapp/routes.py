@@ -322,20 +322,13 @@ def remove_friend_userid_provided(user_id):
         db.session.delete(friend_record)
         db.session.commit()
     return redirect(url_for("show_friends"))
-
-
-#Pomodoro app
-# @myapp_obj.route("/pomodoro")
-# def tomato():
-#     """Show Pomodoro timer route"""
-#     return render_template("/pomodoro.html")
-#stopwatch app
+#stopwatch route
 @myapp_obj.route("/stopwatch")
 def stopwatch():
     """Show stopwatch route"""
     return render_template("/stopwatch.html")
 
-
+#activity page route
 @myapp_obj.route("/activity")
 def activity():
     return render_template("activity.html")
@@ -422,15 +415,6 @@ def view_journal(journal_id):
         posted_journals = posted_journals + [{'name':f'{x.name}','id':f'{x.id}'}]
     return render_template('journal.html', title='Journal', posted_journals=posted_journals, journal=journal, html_text=html_text, user_id=user_id, search_form=SearchForm())
 
-
-@myapp_obj.route("/download-journal-as-pdf/<int:journal_id>", methods=['GET', 'POST'])
-@login_required
-def download_journal_as_pdf(journal_id):
-    '''Route will allow for html journal to be downloaded as pdf in the md file in a pdf directory'''
-    journal = Journal.query.filter_by(id=journal_id, user_id=current_user.get_id()).one_or_none()
-    db.session.delete(journal)
-    db.session.commit()
-    return redirect(url_for("show_journals"))
 
 
 
