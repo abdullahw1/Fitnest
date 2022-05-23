@@ -17,7 +17,7 @@ Step 3: Go into the project main directory
   
     % cd Fitnest Health Applic
     
-Step 4(recommended): It's recommended to create a virtual environment so we can make sure we have correct packages
+Step 4(recommended but not essential): It's recommended to create a virtual environment so we can make sure we have correct packages
 
     % pip3 install venv
     % python3 -m venv venv
