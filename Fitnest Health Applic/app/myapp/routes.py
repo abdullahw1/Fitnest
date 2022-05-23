@@ -33,7 +33,6 @@ from base64 import b64encode
 from flask import render_template, flash, redirect, url_for, request, jsonify, abort, send_file
 from werkzeug.security import generate_password_hash
 from flask_login import current_user, login_user, logout_user, login_required
-from xhtml2pdf import pisa
 from werkzeug.utils import secure_filename
 
 
