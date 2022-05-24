@@ -85,7 +85,7 @@ class UploadMarkdownForm(FlaskForm):
         file: Markdown file field to select markdown file to upload
         upload: Submit button to confirm upload
     """
-    file = FileField('Select .txt file:', validators=[FileRequired(), FileAllowed(['md','txt'])])
+    file = FileField('Select .md or .txt file:', validators=[FileRequired(), FileAllowed(['md','txt'])])
     upload = SubmitField('Upload')
 
 
