@@ -263,4 +263,4 @@ zipp = "==3.6.0"
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10.8"
